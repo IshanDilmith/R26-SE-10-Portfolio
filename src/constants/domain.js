@@ -1,12 +1,12 @@
 // Content for the "Domain" section. Each export maps to one tab.
 
 export const DOMAIN_TABS = [
-  { id: "literature", label: "Literature Survey" },
-  { id: "gap", label: "Research Gap" },
-  { id: "problem", label: "Research Problem" },
-  { id: "objectives", label: "Objectives" },
-  { id: "methodology", label: "Methodology" },
-  { id: "technologies", label: "Technologies" },
+  { id: "literature", label: "Literature Survey", blurb: "Prior work we studied" },
+  { id: "gap", label: "Research Gap", blurb: "What existing systems miss" },
+  { id: "problem", label: "Research Problem", blurb: "The question we answer" },
+  { id: "objectives", label: "Objectives", blurb: "What we set out to build" },
+  { id: "methodology", label: "Methodology", blurb: "How we built and evaluated it" },
+  { id: "technologies", label: "Technologies", blurb: "Tools, models and datasets" },
 ];
 
 export const LITERATURE_SURVEY = {

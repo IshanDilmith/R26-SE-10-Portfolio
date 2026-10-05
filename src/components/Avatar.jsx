@@ -8,10 +8,11 @@ function initials(name) {
     .join("");
 }
 
-export default function Avatar({ name, image, size = "lg" }) {
+// size: "sm" | "md" | "portrait"
+export default function Avatar({ name, image, size = "md" }) {
   return (
     <div className={`avatar avatar-${size}`}>
-      {image ? <img src={image} alt={name} loading="lazy" /> : <span>{initials(name)}</span>}
+      {image ? <img src={image} alt={name} loading="lazy" /> : <span aria-hidden="true">{initials(name)}</span>}
     </div>
   );
 }

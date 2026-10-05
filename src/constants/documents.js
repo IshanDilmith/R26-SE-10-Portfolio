@@ -18,25 +18,25 @@ export const DOCUMENT_GROUPS = [
     group: "Project Proposal",
     items: [
       {
-        title: "Proposal — Adaptive Pedagogical Module",
+        title: "Proposal: Adaptive Pedagogical Module",
         description: "IT22135216 · Ranasinghe S.D.",
         type: "PDF",
         link: "",
       },
       {
-        title: "Proposal — Multimodal Communication Analysis",
+        title: "Proposal: Multimodal Communication Analysis",
         description: "IT22137364 · Thilakarathna Y.I.D.",
         type: "PDF",
         link: "",
       },
       {
-        title: "Proposal — Role-Play Simulation Engine",
+        title: "Proposal: Role-Play Simulation Engine",
         description: "IT22195234 · Thamel W.M.A.",
         type: "PDF",
         link: "",
       },
       {
-        title: "Proposal — Feedback System & Predictive Analytics",
+        title: "Proposal: Feedback System & Predictive Analytics",
         description: "IT22208880 · Ambegoda A.L.A.S.K.",
         type: "PDF",
         link: "",
@@ -54,10 +54,10 @@ export const DOCUMENT_GROUPS = [
     group: "Final Reports",
     items: [
       { title: "Group Final Report", description: "Complete thesis for the integrated platform.", type: "PDF", link: "" },
-      { title: "Final Report — APM", description: "IT22135216 · Individual thesis.", type: "PDF", link: "" },
-      { title: "Final Report — MCA", description: "IT22137364 · Individual thesis.", type: "PDF", link: "" },
-      { title: "Final Report — RPE", description: "IT22195234 · Individual thesis.", type: "PDF", link: "" },
-      { title: "Final Report — FSPA", description: "IT22208880 · Individual thesis.", type: "PDF", link: "" },
+      { title: "Final Report: APM", description: "IT22135216 · Individual thesis.", type: "PDF", link: "" },
+      { title: "Final Report: MCA", description: "IT22137364 · Individual thesis.", type: "PDF", link: "" },
+      { title: "Final Report: RPE", description: "IT22195234 · Individual thesis.", type: "PDF", link: "" },
+      { title: "Final Report: FSPA", description: "IT22208880 · Individual thesis.", type: "PDF", link: "" },
     ],
   },
   {

@@ -1,39 +1,111 @@
-import { Presentation, ExternalLink, Clock } from "lucide-react";
+import { useRef } from "react";
+import { ArrowUpRight, Clock } from "lucide-react";
 import SectionHeader from "./SectionHeader.jsx";
 import { PRESENTATIONS } from "../constants/presentations.js";
+import { SITE } from "../constants/site.js";
+import { gsap, useGSAP, MOTION_OK } from "../lib/gsap.js";
 
 export default function Presentations() {
+  const root = useRef(null);
+
+  useGSAP(
+    () => {
+      const mm = gsap.matchMedia();
+
+      mm.add(MOTION_OK, () => {
+        gsap.from(".deck", {
+          y: 64,
+          autoAlpha: 0,
+          stagger: 0.1,
+          duration: 1.2,
+          scrollTrigger: { trigger: ".deck-stage", start: "top 85%", once: true },
+        });
+      });
+
+      // Desktop: pin the decks and walk through them sideways as the page scrolls.
+      mm.add(`(min-width: 1025px) and ${MOTION_OK}`, () => {
+        const section = root.current;
+        const stage = section.querySelector(".deck-stage");
+        const rail = section.querySelector(".deck-rail");
+        section.classList.add("is-panning");
+
+        const distance = () => {
+          const last = rail.lastElementChild;
+          const padEnd = parseFloat(getComputedStyle(rail).paddingRight);
+          return Math.max(0, last.offsetLeft + last.offsetWidth + padEnd - rail.clientWidth);
+        };
+
+        const pan = gsap.to(rail, {
+          x: () => -distance(),
+          ease: "none",
+          scrollTrigger: {
+            trigger: stage,
+            pin: true,
+            start: "center center",
+            end: () => `+=${distance()}`,
+            scrub: 1,
+            invalidateOnRefresh: true,
+          },
+        });
+
+        // Slides tilt and settle as they travel in from the right.
+        gsap.utils.toArray(".deck", rail).forEach((deck) => {
+          gsap.from(deck.querySelector(".deck-thumb"), {
+            rotation: 5,
+            yPercent: 10,
+            scale: 0.88,
+            ease: "none",
+            scrollTrigger: {
+              trigger: deck,
+              containerAnimation: pan,
+              start: "left right",
+              end: "left 50%",
+              scrub: true,
+            },
+          });
+        });
+
+        return () => section.classList.remove("is-panning");
+      });
+    },
+    { scope: root }
+  );
+
   return (
-    <section id="presentations" className="section">
+    <section id="presentations" className="section presentations" ref={root}>
       <div className="container">
         <SectionHeader
-          eyebrow="Presentations"
           title="Slide decks"
           subtitle="Slides from each assessment stage of the project."
         />
-        <div className="grid grid-4">
-          {PRESENTATIONS.map((p, i) => (
-            <article key={p.title} className="slide-card reveal">
-              <div className="slide-thumb">
+      </div>
+      <div className="deck-stage">
+        <div className="deck-rail" tabIndex={0} aria-label="Slide decks, scroll horizontally">
+          {PRESENTATIONS.map((p) => (
+            <article key={p.title} className="deck">
+              <div className="deck-thumb">
                 {p.thumbnail ? (
                   <img src={p.thumbnail} alt={p.title} loading="lazy" />
                 ) : (
-                  <div className="slide-placeholder">
-                    <Presentation size={34} strokeWidth={1.6} />
-                    <span>0{i + 1}</span>
+                  <div className="deck-cover" aria-hidden="true">
+                    <span>{SITE.name}</span>
+                    <strong>{p.title}</strong>
+                    <span>{SITE.projectId}</span>
                   </div>
                 )}
               </div>
-              <div className="slide-body">
+              <div className="deck-body">
                 <time>{p.date}</time>
                 <h3>{p.title}</h3>
                 <p>{p.description}</p>
                 {p.link ? (
                   <a href={p.link} target="_blank" rel="noreferrer" className="text-link">
-                    View slides <ExternalLink size={15} />
+                    View slides <ArrowUpRight size={16} />
                   </a>
                 ) : (
-                  <span className="text-link disabled"><Clock size={15} /> Coming soon</span>
+                  <span className="text-link is-disabled">
+                    <Clock size={14} /> Coming soon
+                  </span>
                 )}
               </div>
             </article>

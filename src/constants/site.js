@@ -13,7 +13,7 @@ export const SITE = {
   year: "2026",
   // e.g. "/images/logo.png" — null shows the built-in monogram
   logo: null,
-  // e.g. "/images/hero.png" — null shows the illustrated platform preview
+  // e.g. "/images/hero.png" — null shows the face-landmark illustration
   heroImage: null,
   // Leave empty ("") to hide the button
   links: {

@@ -9,7 +9,7 @@ export const MILESTONES = [
     start: "2026-03-15",
     end: "2026-03-18",
     description:
-      "Topic assessment, proposal report submission (15 March) and proposal presentation (16–18 March) defining the research problem, objectives and architecture.",
+      "Topic assessment, proposal report submission (15 March) and proposal presentation (16-18 March) defining the research problem, objectives and architecture.",
     marks: "",
   },
   {

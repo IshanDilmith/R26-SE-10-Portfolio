@@ -1,6 +1,6 @@
 // Supervisors and team members.
 // `image` e.g. "/images/team/ishan.jpg" — null shows initials.
-// Social links: leave "" to hide the icon.
+// Social links appear in the profile pop-up; leave "" until they are available.
 
 export const SUPERVISORS = [
   {
@@ -8,7 +8,7 @@ export const SUPERVISORS = [
     name: "Mr. Vishan Jayasinghearachchi",
     role: "Supervisor",
     affiliation: "Faculty of Computing, SLIIT",
-    image: null,
+    image: "/images/team/supervisor.jpg",
     email: "",
     linkedin: "",
   },
@@ -17,7 +17,7 @@ export const SUPERVISORS = [
     name: "Ms. Kaushalya Rajapakse",
     role: "Co-Supervisor",
     affiliation: "Faculty of Computing, SLIIT",
-    image: null,
+    image: "/images/team/co-supervisor.jpg",
     email: "",
     linkedin: "",
   },
@@ -29,10 +29,10 @@ export const TEAM_MEMBERS = [
     name: "Ranasinghe S.D.",
     studentId: "IT22135216",
     role: "Adaptive Pedagogical Module",
-    image: null,
+    image: "/images/team/sakindu.jpg",
     email: "",
-    linkedin: "",
-    github: "",
+    linkedin: "https://www.linkedin.com/in/sakindu-ranasinghe-732693243",
+    github: "https://github.com/SakinduD",
   },
   {
     id: "ishan",

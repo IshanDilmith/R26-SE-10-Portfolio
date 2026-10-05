@@ -1,7 +1,8 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Check, ChevronRight, Minus, X } from "lucide-react";
 import SectionHeader from "./SectionHeader.jsx";
 import Icon from "./Icon.jsx";
+import { gsap, useGSAP, motionAllowed } from "../lib/gsap.js";
 import {
   DOMAIN_TABS,
   LITERATURE_SURVEY,
@@ -94,13 +95,13 @@ function Objectives() {
   return (
     <>
       <div className="main-objective">
-        <span className="eyebrow">Main objective</span>
+        <h4>Main objective</h4>
         <p>{OBJECTIVES.main}</p>
       </div>
       <div className="panel-grid">
         {OBJECTIVES.specific.map((item, i) => (
           <article key={item.title} className="panel-card card-numbered">
-            <span className="num">{i + 1}</span>
+            <span className="num">{pad(i + 1)}</span>
             <div>
               <h4>{item.title}</h4>
               <p>{item.body}</p>
@@ -119,7 +120,7 @@ function Methodology() {
       <ol className="steps">
         {METHODOLOGY.steps.map((step, i) => (
           <li key={step.title}>
-            <span className="step-num">{i + 1}</span>
+            <span className="step-num">{pad(i + 1)}</span>
             <div>
               <h4>{step.title}</h4>
               <p>{step.body}</p>
@@ -152,6 +153,10 @@ function Technologies() {
   );
 }
 
+// Leaf blocks inside a panel, in reading order, for the tab-change stagger.
+const PANEL_ITEMS =
+  ".panel-title, .lead, .statement, .main-objective, .panel-card, .numbered li, .steps li, .table-wrap, .figure";
+
 const PANELS = {
   literature: Literature,
   gap: Gap,
@@ -166,6 +171,44 @@ export default function Domain() {
   const buttons = useRef([]);
   const index = DOMAIN_TABS.findIndex((t) => t.id === tab);
   const Panel = PANELS[tab];
+  const root = useRef(null);
+  const indicator = useRef(null);
+  const firstRun = useRef(true);
+
+  const placement = () => {
+    const btn = buttons.current[index];
+    return { x: btn.offsetLeft, y: btn.offsetTop, width: btn.offsetWidth, height: btn.offsetHeight };
+  };
+
+  // The highlight glides to the selected tab, then the new panel's blocks cascade in.
+  useGSAP(
+    () => {
+      const animate = motionAllowed() && !firstRun.current;
+      firstRun.current = false;
+      if (!animate) {
+        gsap.set(indicator.current, placement());
+        return;
+      }
+      gsap.to(indicator.current, { ...placement(), duration: 0.7, ease: "expo.out", overwrite: true });
+      gsap.from(root.current.querySelectorAll(`.domain-panel :is(${PANEL_ITEMS})`), {
+        y: 28,
+        autoAlpha: 0,
+        duration: 0.9,
+        stagger: 0.05,
+      });
+    },
+    { dependencies: [tab], scope: root }
+  );
+
+  // Keep the highlight attached when the tab list reflows (breakpoints, font load).
+  useEffect(() => {
+    const nav = buttons.current[0]?.parentElement;
+    if (!nav) return;
+    const observer = new ResizeObserver(() => gsap.set(indicator.current, placement()));
+    observer.observe(nav);
+    return () => observer.disconnect();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [index]);
 
   const onKeyDown = (e) => {
     const step = { ArrowDown: 1, ArrowRight: 1, ArrowUp: -1, ArrowLeft: -1 }[e.key];
@@ -177,15 +220,15 @@ export default function Domain() {
   };
 
   return (
-    <section id="domain" className="section">
+    <section id="domain" className="section" ref={root}>
       <div className="container">
         <SectionHeader
-          eyebrow="Research domain"
           title="Why this research matters"
           subtitle="The literature, the gap we found, and how we set out to close it."
         />
         <div className="domain reveal">
-          <div className="domain-nav" role="tablist" aria-orientation="vertical" onKeyDown={onKeyDown}>
+          <div className="domain-nav" role="tablist" aria-label="Research domain" onKeyDown={onKeyDown}>
+            <span className="tab-indicator" ref={indicator} aria-hidden="true" />
             {DOMAIN_TABS.map((t, i) => (
               <button
                 key={t.id}
@@ -198,12 +241,11 @@ export default function Domain() {
                 className={tab === t.id ? "is-active" : ""}
                 onClick={() => setTab(t.id)}
               >
-                <span className="idx">{pad(i + 1)}</span>
                 <span className="label">
                   <strong>{t.label}</strong>
                   <small>{t.blurb}</small>
                 </span>
-                <ChevronRight size={16} className="chev" />
+                <ChevronRight size={18} className="chev" />
               </button>
             ))}
           </div>
@@ -215,10 +257,7 @@ export default function Domain() {
             aria-labelledby={`domain-tab-${tab}`}
             key={tab}
           >
-            <header className="panel-head">
-              <span className="eyebrow">{pad(index + 1)} / {pad(DOMAIN_TABS.length)}</span>
-              <h3>{DOMAIN_TABS[index].label}</h3>
-            </header>
+            <h3 className="panel-title">{DOMAIN_TABS[index].label}</h3>
             <Panel />
           </div>
         </div>

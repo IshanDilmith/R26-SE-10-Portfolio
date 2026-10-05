@@ -11,7 +11,7 @@ export const DOMAIN_TABS = [
 
 export const LITERATURE_SURVEY = {
   intro:
-    "Gen Z employees (born 1997–2012) are technically strong but often arrive in the workplace without the communication, conflict-handling and emotional intelligence skills employers expect. A 2024 LinkedIn study reports that 62% of organisations see the soft skills gap as a barrier to business success, and Gen Z's average job stint is around 1.1 years. Our survey covered four areas of prior work.",
+    "Gen Z employees (born 1997-2012) are technically strong but often arrive in the workplace without the communication, conflict-handling and emotional intelligence skills employers expect. A 2024 LinkedIn study reports that 62% of organisations see the soft skills gap as a barrier to business success, and Gen Z's average job stint is around 1.1 years. Our survey covered four areas of prior work.",
   cards: [
     {
       title: "Passive e-learning",

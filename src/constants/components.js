@@ -38,9 +38,9 @@ export const RESEARCH_COMPONENTS = [
     novelty:
       "Client-side real-time affect fusion: no raw video leaves the browser, and conflicting signals such as sarcasm or a tense presenter are resolved in real time.",
     features: [
-      "MediaPipe face mesh — EAR, MAR, yaw / pitch / roll",
+      "MediaPipe face mesh: EAR, MAR, yaw / pitch / roll",
       "Pitch, pace, volume and clarity analysers (librosa)",
-      "Speech emotion recognition — SVM and CNN (RAVDESS)",
+      "Speech emotion recognition: SVM and CNN (RAVDESS)",
       "8 affect fusion rules (e.g. sarcasm, script reader, deer-in-headlights)",
       "Baseline assessment and session scoring",
     ],

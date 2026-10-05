@@ -63,14 +63,7 @@ export default function ResearchComponents() {
 
   return (
     <section id="components" className="section" ref={root}>
-      <div className="container">
-        <SectionHeader
-          title="Four components, one coaching loop"
-          subtitle="Each member owns one component. Together they form a loop: assess → practise → coach → analyse → adapt."
-        />
-      </div>
-
-      <div className="loop-band" aria-hidden="true">
+    <div className="loop-band" aria-hidden="true">
         <div className="loop-track">
           {[...LOOP, ...LOOP, ...LOOP].map((word, i) => (
             <span key={i} className={i % 2 ? "is-outline" : ""}>
@@ -79,6 +72,13 @@ export default function ResearchComponents() {
             </span>
           ))}
         </div>
+      </div>
+
+      <div className="container">
+        <SectionHeader
+          title="Four components, one coaching loop"
+          subtitle="Each member owns one component. Together they form a loop: assess → practise → coach → analyse → adapt."
+        />
       </div>
 
       <div className="container">

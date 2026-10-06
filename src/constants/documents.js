@@ -24,7 +24,7 @@ export const DOCUMENT_GROUPS = [
         link: "",
       },
       {
-        title: "Proposal: Multimodal Communication Analysis",
+        title: "Proposal: Multimodal Communication Analysis Module",
         description: "IT22137364 · Thilakarathna Y.I.D.",
         type: "PDF",
         link: "",

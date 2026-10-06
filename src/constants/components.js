@@ -27,7 +27,7 @@ export const RESEARCH_COMPONENTS = [
   {
     id: "mca",
     code: "MCA",
-    title: "Multimodal Communication Analysis",
+    title: "Multimodal Communication Analysis Module",
     tagline: "The eyes and ears of the platform.",
     memberId: "ishan",
     accent: "#0ea5a4",

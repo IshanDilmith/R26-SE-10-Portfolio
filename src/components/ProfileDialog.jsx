@@ -35,7 +35,7 @@ export default function ProfileDialog({ member, component, origin, onClosed }) {
       if (!motionAllowed() || !origin) return;
 
       const panel = el.querySelector(".profile-panel");
-      const name = SplitText.create(el.querySelector(".profile-name"), { ...SPLIT_CLASSES, type: "chars", mask: "chars" });
+      const name = SplitText.create(el.querySelector(".profile-name"), { ...SPLIT_CLASSES, type: "words,chars", mask: "chars" });
       openTl.current = gsap
         .timeline({ defaults: { ease: "expo.out" } })
         .from(".profile-backdrop", { autoAlpha: 0, duration: 0.5, ease: "power2.out" }, 0)

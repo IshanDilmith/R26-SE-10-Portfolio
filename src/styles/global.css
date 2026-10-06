@@ -1983,46 +1983,48 @@ a.text-link:hover svg {
   letter-spacing: -0.02em;
 }
 
+/* Same card as the team members, sized to match a member column and centred. */
 .supervisors {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, calc((100% - 48px) / 4)));
+  justify-content: center;
   gap: 16px;
 }
 
-.supervisor {
+/* Cards stretch to the tallest in the row; socials sit on the bottom edge. */
+.member.supervisor {
   display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 14px 20px 14px 14px;
-  border: 1px solid var(--line);
-  border-radius: var(--r-panel);
-  background: var(--surface);
+  flex-direction: column;
 }
 
-.supervisor > div:nth-child(2) {
+.supervisor .avatar {
+  flex-shrink: 0;
+}
+
+.supervisor .member-body {
+  display: flex;
   flex: 1;
-  min-width: 0;
+  flex-direction: column;
+}
+
+.supervisor .socials {
+  margin-top: auto;
+  padding-top: 14px;
 }
 
 .supervisor h4 {
   font-family: var(--font-display);
-  font-size: 1.1rem;
-  letter-spacing: -0.015em;
-}
-
-.supervisor p {
-  margin-top: 2px;
-  font-size: 14px;
-  color: var(--muted);
-}
-
-.supervisor .socials {
-  margin-top: 0;
+  font-size: 1.2rem;
+  letter-spacing: -0.02em;
 }
 
 /* Whole card opens the profile; the "+" badge is the visual cue. */
 .member {
   cursor: pointer;
+}
+
+.member.supervisor {
+  cursor: default;
 }
 
 .member-open {
@@ -2181,9 +2183,14 @@ html.has-dialog {
 
 .profile-name {
   margin-top: 18px;
-  font-size: clamp(2rem, 3.6vw, 2.9rem);
-  line-height: 1;
+  font-size: clamp(1.75rem, 3.2vw, 2.5rem);
+  line-height: 1.05;
   letter-spacing: -0.035em;
+}
+
+/* Wrap long names between words only, never mid-word. */
+.profile-name .split-word {
+  white-space: nowrap;
 }
 
 .profile-role {
@@ -2458,7 +2465,7 @@ a.profile-link:hover .profile-link-arrow {
 }
 
 .contact-form .btn {
-  align-self: flex-start;
+  align-self: flex-end;
 }
 
 /* ---------- Footer ---------- */
@@ -2627,7 +2634,8 @@ a.profile-link:hover .profile-link-arrow {
     gap: 16px;
   }
 
-  .members {
+  .members,
+  .supervisors {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -2650,8 +2658,7 @@ a.profile-link:hover .profile-link-arrow {
 
   .panel-grid,
   .features,
-  .doc-list,
-  .supervisors {
+  .doc-list {
     grid-template-columns: minmax(0, 1fr);
   }
 
@@ -2703,15 +2710,12 @@ a.profile-link:hover .profile-link-arrow {
     display: none;
   }
 
-  .members {
+  .members,
+  .supervisors {
     gap: 12px;
   }
 
   .member-body {
     padding: 14px 14px 18px;
-  }
-
-  .supervisor {
-    flex-wrap: wrap;
   }
 }

@@ -47,7 +47,7 @@ export const TEAM_MEMBERS = [
     id: "ishan",
     name: "Thilakarathna Y.I.D.",
     studentId: "IT22137364",
-    role: "Multimodal Communication Analysis",
+    role: "Multimodal Communication Analysis Module",
     image: "/images/team/ishan.jpg",
     email: "ishandilmith@gmail.com",
     linkedin: "https://www.linkedin.com/in/ishan-dilmith-951b43273",

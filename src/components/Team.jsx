@@ -173,15 +173,14 @@ export default function Team() {
         <h3 className="supervision-title reveal">Supervision</h3>
         <div className="supervisors">
           {SUPERVISORS.map((s) => (
-            <article key={s.id} className="supervisor reveal">
-              <Avatar name={s.name} image={s.image} size="md" />
-              <div>
+            <article key={s.id} className="member supervisor reveal">
+              <Avatar name={s.name} image={s.image} size="portrait" />
+              <div className="member-body">
                 <h4>{s.name}</h4>
-                <p>
-                  {s.role}, {s.affiliation}
-                </p>
+                <p className="member-role">{s.role}</p>
+                <p className="member-id">{s.affiliation}</p>
+                <Socials person={s} />
               </div>
-              <Socials person={s} />
             </article>
           ))}
         </div>

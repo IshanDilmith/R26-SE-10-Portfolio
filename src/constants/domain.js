@@ -103,7 +103,7 @@ export const OBJECTIVES = {
       body: "Map Big Five (OCEAN) personality traits to teaching strategies, generate LLM-based training content and adjust difficulty dynamically.",
     },
     {
-      title: "Multimodal communication analysis",
+      title: "Multimodal communication analysis Module",
       body: "Detect facial landmarks with MediaPipe, analyse vocal prosody and fuse both streams into real-time coaching nudges.",
     },
     {

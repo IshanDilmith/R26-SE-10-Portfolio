@@ -26,7 +26,7 @@ export const SUPERVISORS = [
     name: "Dr. W. J. Stanley Fernando",
     role: "External Supervisor",
     affiliation: "M.B.B.S. (COL) D.F.M. (SL) HND COUNSELLING (FI)",
-    image: "/images/team/external-supervisor.jpg",
+    image: "/images/team/external-supervisor.png",
     email: "",
     linkedin: "",
   },

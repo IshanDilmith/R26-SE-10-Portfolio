@@ -128,4 +128,4 @@ redirect. Any static host (Vercel, GitHub Pages) also works with the same build 
 
 ---
 
-© 2026 EmpowerZ (R26-SE-010), Sri Lanka Institute of Information Technology.
+© 2026 EmpowerZ (R26-SE-010).

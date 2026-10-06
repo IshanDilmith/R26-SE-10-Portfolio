@@ -220,7 +220,7 @@ export default function Domain() {
   };
 
   return (
-    <section id="domain" className="section" ref={root}>
+    <section id="domain" className="section section-tinted" ref={root}>
       <div className="container">
         <SectionHeader
           title="Why this research matters"

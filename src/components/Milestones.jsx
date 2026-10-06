@@ -83,7 +83,7 @@ export default function Milestones() {
   );
 
   return (
-    <section id="milestones" className="section" ref={root}>
+    <section id="milestones" className="section section-tinted" ref={root}>
       <div className="container milestones">
         <div className="milestones-aside">
           <SectionHeader

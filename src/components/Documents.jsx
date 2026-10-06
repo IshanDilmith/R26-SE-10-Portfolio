@@ -41,7 +41,7 @@ export default function Documents() {
   );
 
   return (
-    <section id="documents" className="section section-tinted" ref={root}>
+    <section id="documents" className="section" ref={root}>
       <div className="container">
         <SectionHeader
           title="Reports & submissions"

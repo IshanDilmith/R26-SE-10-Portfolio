@@ -10,7 +10,7 @@
 :root {
   color-scheme: light;
   --bg: #f4f3f6;
-  --bg-tint: #ebeaf0;
+  --bg-tint: #e9e7ef;
   --surface: #fbfbfc;
   --surface-2: #e8e6ee;
   --ink: #141318;
@@ -45,7 +45,7 @@
   :root:not([data-theme="light"]) {
     color-scheme: dark;
     --bg: #0d0c10;
-    --bg-tint: #121117;
+    --bg-tint: #141319;
     --surface: #17161c;
     --surface-2: #1f1e26;
     --ink: #edecf2;
@@ -68,7 +68,7 @@
 :root[data-theme="dark"] {
   color-scheme: dark;
   --bg: #0d0c10;
-  --bg-tint: #121117;
+  --bg-tint: #141319;
   --surface: #17161c;
   --surface-2: #1f1e26;
   --ink: #edecf2;
@@ -202,11 +202,15 @@ section[id] {
 }
 
 .section {
+  --section-bg: var(--bg);
   padding-block: clamp(88px, 11vw, 148px);
+  background: var(--section-bg);
 }
 
+/* Sections alternate plain / tinted so neighbours stay distinct. */
 .section-tinted {
-  background: var(--bg-tint);
+  --section-bg: var(--bg-tint);
+  border-block: 1px solid var(--line);
 }
 
 .eyebrow {
@@ -476,6 +480,7 @@ section[id] {
 .hero {
   position: relative;
   padding-top: calc(var(--nav-h) + 12px + clamp(28px, 5vw, 64px));
+  padding-bottom: clamp(88px, 11vw, 148px);
 }
 
 .hero-grid {
@@ -1171,7 +1176,7 @@ section[id] {
 
 /* Stroke painted under a background-coloured fill hides the variable font's overlapping contours. */
 .loop-track span.is-outline {
-  color: var(--bg);
+  color: var(--section-bg, var(--bg));
   -webkit-text-stroke: 3px var(--ink);
   paint-order: stroke fill;
 }
@@ -1506,7 +1511,7 @@ section[id] {
   margin-top: 18px;
   border-radius: 999px;
   border: 1.5px solid var(--line-strong);
-  background: var(--bg);
+  background: var(--section-bg, var(--bg));
 }
 
 .timeline-item.completed .timeline-dot {
@@ -1959,6 +1964,17 @@ a.text-link:hover svg {
 .socials a:hover {
   border-color: var(--accent);
   color: var(--accent-text);
+}
+
+/* Sit above the full-card profile button so the links stay clickable. */
+.member .socials {
+  position: relative;
+  z-index: 3;
+  width: fit-content;
+}
+
+.member .socials a {
+  background: var(--surface);
 }
 
 .supervision-title {
@@ -2449,8 +2465,7 @@ a.profile-link:hover .profile-link-arrow {
 
 .footer {
   padding: clamp(64px, 8vw, 96px) 0 28px;
-  border-top: 1px solid var(--line);
-  background: var(--bg-tint);
+  background: var(--bg);
 }
 
 .footer-inner {

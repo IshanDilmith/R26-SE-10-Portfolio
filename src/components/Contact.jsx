@@ -61,7 +61,7 @@ export default function Contact() {
   );
 
   return (
-    <section id="contact" className="section contact-section" ref={root}>
+    <section id="contact" className="section section-tinted contact-section" ref={root}>
       <div className={`container contact ${CONTACT.email ? "" : "contact-single"}`}>
         <div className="contact-intro">
           <h2>{CONTACT.heading}</h2>

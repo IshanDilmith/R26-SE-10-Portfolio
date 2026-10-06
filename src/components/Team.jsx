@@ -7,9 +7,9 @@ import { SUPERVISORS, TEAM_MEMBERS } from "../constants/team.js";
 import { RESEARCH_COMPONENTS } from "../constants/components.js";
 import { gsap, useGSAP, MOTION_OK, FINE_POINTER } from "../lib/gsap.js";
 
-function Socials({ person }) {
+function Socials({ person, email = true }) {
   const links = [
-    person.email && { href: `mailto:${person.email}`, icon: Mail, label: "Email" },
+    email && person.email && { href: `mailto:${person.email}`, icon: Mail, label: "Email" },
     person.linkedin && { href: person.linkedin, icon: Linkedin, label: "LinkedIn" },
     person.github && { href: person.github, icon: Github, label: "GitHub" },
   ].filter(Boolean);
@@ -135,7 +135,7 @@ export default function Team() {
   );
 
   return (
-    <section id="team" className="section section-tinted" ref={root}>
+    <section id="team" className="section" ref={root}>
       <div className="container">
         <SectionHeader
           eyebrow="About us"
@@ -151,6 +151,7 @@ export default function Team() {
                 <h3>{m.name}</h3>
                 <p className="member-role">{m.role}</p>
                 <p className="member-id">{m.studentId}</p>
+                <Socials person={m} email={false} />
               </div>
               <span className="member-plus" aria-hidden="true">
                 <Plus size={16} />

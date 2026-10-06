@@ -72,7 +72,7 @@ export default function Presentations() {
   );
 
   return (
-    <section id="presentations" className="section presentations" ref={root}>
+    <section id="presentations" className="section section-tinted presentations" ref={root}>
       <div className="container">
         <SectionHeader
           title="Slide decks"

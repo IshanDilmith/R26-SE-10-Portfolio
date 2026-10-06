@@ -30,7 +30,7 @@ EmpowerZ addresses this with four research components:
 | Code | Component | What it does |
 |------|-----------|--------------|
 | **APM** | Adaptive Pedagogical Module | Maps a learner's Big Five (OCEAN) personality to a teaching strategy, generates LLM training plans and adjusts difficulty dynamically. |
-| **MCA** | Multimodal Communication Analysis | Tracks face landmarks in the browser (MediaPipe) and analyses voice prosody and emotion, fusing both into real-time coaching nudges, with no raw video leaving the browser. |
+| **MCA** | Multimodal Communication Analysis Module | Tracks face landmarks in the browser (MediaPipe) and analyses voice prosody and emotion, fusing both into real-time coaching nudges, with no raw video leaving the browser. |
 | **RPE** | Role-Play Simulation Engine | Voice-driven role-play with AI characters that keep emotional memory (trust, escalation, mood) across turns. |
 | **FSPA** | Feedback System & Predictive Analytics | Builds a Skill-Twin profile, analyses peer-feedback sentiment, detects blind spots and generates mentoring recommendations. |
 
@@ -61,7 +61,7 @@ The project follows **Design Science Research (DSR)** and supports **SDG 4 (Qual
 | Name | Student ID | Component |
 |------|------------|-----------|
 | Ranasinghe S.D. | IT22135216 | Adaptive Pedagogical Module |
-| Thilakarathna Y.I.D. | IT22137364 | Multimodal Communication Analysis |
+| Thilakarathna Y.I.D. | IT22137364 | Multimodal Communication Analysis Module |
 | Thamel W.M.A. | IT22195234 | Role-Play Simulation Engine |
 | Ambegoda A.L.A.S.K. | IT22208880 | Feedback System & Predictive Analytics |
 

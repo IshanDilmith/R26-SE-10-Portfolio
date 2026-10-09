@@ -9,7 +9,7 @@
     />
     <meta name="theme-color" content="#f4f3f6" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#0d0c10" media="(prefers-color-scheme: dark)" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <script>
       // Apply the saved theme before first paint to avoid a flash.
       try {
@@ -18,9 +18,165 @@
       } catch (e) {}
     </script>
     <title>EmpowerZ | R26-SE-010</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@200..800&family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&display=swap"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+
+    <!-- Site content: edit the files in content/ to change text, links and images. -->
+    <script src="content/site.js" defer></script>
+    <script src="content/domain.js" defer></script>
+    <script src="content/components.js" defer></script>
+    <script src="content/milestones.js" defer></script>
+    <script src="content/documents.js" defer></script>
+    <script src="content/presentations.js" defer></script>
+    <script src="content/team.js" defer></script>
+    <script src="content/contact.js" defer></script>
+
+    <!-- Libraries: GSAP (animation) and Lucide (icons). -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollToPlugin.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/SplitText.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrambleTextPlugin.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/DrawSVGPlugin.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/Flip.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/lucide@0.460.0/dist/umd/lucide.min.js" defer></script>
+
+    <script src="js/main.js" defer></script>
   </head>
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
+    <header class="navbar">
+      <span class="scroll-progress" aria-hidden="true"></span>
+      <div class="navbar-inner">
+        <a href="#home" class="brand" id="brand"></a>
+        <nav class="nav-links" aria-label="Main" id="nav-links"></nav>
+        <div class="nav-tools">
+          <button type="button" class="icon-btn" id="theme-toggle"></button>
+          <button type="button" class="icon-btn nav-toggle" id="nav-toggle"></button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- Home -->
+      <section id="home" class="hero">
+        <div class="container hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow hero-eyebrow" id="hero-eyebrow"></p>
+            <h1>Soft skills, <span class="accent">coached by AI,</span> built for Gen&nbsp;Z.</h1>
+            <p class="hero-sub" id="hero-sub"></p>
+            <div class="hero-actions" id="hero-actions"></div>
+          </div>
+
+          <figure class="hero-visual" id="hero-visual">
+            <figcaption>Face landmarks are tracked in the browser. No raw video leaves the device.</figcaption>
+          </figure>
+        </div>
+
+        <div class="container hero-facts reveal" id="hero-facts"></div>
+      </section>
+
+      <!-- Domain -->
+      <section id="domain" class="section section-tinted">
+        <div class="container">
+          <header class="section-header">
+            <h2>Why this research matters</h2>
+            <p class="section-sub">The literature, the gap we found, and how we set out to close it.</p>
+          </header>
+          <div class="domain reveal">
+            <div class="domain-nav" role="tablist" aria-label="Research domain" id="domain-nav">
+              <span class="tab-indicator" aria-hidden="true"></span>
+            </div>
+            <div class="domain-panel" id="domain-panel" role="tabpanel"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Components -->
+      <section id="components" class="section">
+        <div class="loop-band" aria-hidden="true">
+          <div class="loop-track" id="loop-track"></div>
+        </div>
+        <div class="container">
+          <header class="section-header">
+            <h2>Four components, one coaching loop</h2>
+            <p class="section-sub">
+              Each member owns one component. Together they form a loop: assess → practise → coach → analyse → adapt.
+            </p>
+          </header>
+        </div>
+        <div class="container">
+          <nav class="component-index reveal" aria-label="Research components" id="component-index"></nav>
+          <div class="components" id="components-list"></div>
+        </div>
+      </section>
+
+      <!-- Milestones -->
+      <section id="milestones" class="section section-tinted">
+        <div class="container milestones">
+          <div class="milestones-aside">
+            <header class="section-header">
+              <p class="eyebrow">Milestones</p>
+              <h2>Project timeline</h2>
+              <p class="section-sub">Key assessments of the 2026 research project, from proposal to publication.</p>
+            </header>
+            <div class="progress" id="progress"></div>
+          </div>
+          <ol class="timeline" id="timeline"></ol>
+        </div>
+      </section>
+
+      <!-- Documents -->
+      <section id="documents" class="section">
+        <div class="container">
+          <header class="section-header">
+            <h2>Reports &amp; submissions</h2>
+            <p class="section-sub">Proposals, checklists, theses and the research paper.</p>
+          </header>
+          <div class="filters reveal" role="group" aria-label="Filter documents" id="doc-filters"></div>
+          <div class="doc-groups" id="doc-groups"></div>
+        </div>
+      </section>
+
+      <!-- Presentations -->
+      <section id="presentations" class="section section-tinted presentations">
+        <div class="container">
+          <header class="section-header">
+            <h2>Slide decks</h2>
+            <p class="section-sub">Slides from each assessment stage of the project.</p>
+          </header>
+        </div>
+        <div class="deck-stage">
+          <div class="deck-rail" tabindex="0" aria-label="Slide decks, scroll horizontally" id="deck-rail"></div>
+        </div>
+      </section>
+
+      <!-- About us -->
+      <section id="team" class="section">
+        <div class="container">
+          <header class="section-header">
+            <p class="eyebrow">About us</p>
+            <h2>The team behind EmpowerZ</h2>
+            <p class="section-sub">Final year Software Engineering undergraduates at SLIIT.</p>
+          </header>
+          <div class="members" id="members"></div>
+          <h3 class="supervision-title reveal">Supervision</h3>
+          <div class="supervisors" id="supervisors"></div>
+        </div>
+        <dialog class="profile-dialog" aria-labelledby="profile-name" id="profile-dialog"></dialog>
+      </section>
+
+      <!-- Contact -->
+      <section id="contact" class="section section-tinted contact-section">
+        <div class="container contact" id="contact-inner"></div>
+      </section>
+    </main>
+
+    <footer class="footer" id="footer"></footer>
   </body>
 </html>

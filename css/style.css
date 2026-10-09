@@ -28,9 +28,10 @@
   --shadow: 0 1px 2px rgb(40 24 60 / 0.04), 0 18px 44px -28px rgb(40 24 60 / 0.3);
   --grain-opacity: 0.05;
 
-  --font-display: "Bricolage Grotesque Variable", "Geist Variable", system-ui, sans-serif;
-  --font-body: "Geist Variable", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-mono: "Geist Mono Variable", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  /* Loaded from Google Fonts in index.html */
+  --font-display: "Bricolage Grotesque", "Geist", system-ui, sans-serif;
+  --font-body: "Geist", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
 
   --r-panel: 20px;
   --r-card: 14px;

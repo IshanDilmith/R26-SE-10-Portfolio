@@ -1,7 +1,7 @@
 // Contact section. The form opens the visitor's email app addressed to `email`
 // (no backend needed). If `email` is "", the form is hidden.
 
-export const CONTACT = {
+const CONTACT = {
   heading: "Get in touch",
   blurb:
     "Interested in the research, a demo, or collaborating on soft skills training? Reach out to the team.",

@@ -1,7 +1,11 @@
 // The four individual research components. One card each.
 // `memberId` links to TEAM_MEMBERS in team.js.
+// `icon` is any Lucide icon name in PascalCase (https://lucide.dev/icons).
 
-export const RESEARCH_COMPONENTS = [
+// Words in the scrolling band above the components.
+const COACHING_LOOP = ["Assess", "Practise", "Coach", "Analyse", "Adapt"];
+
+const RESEARCH_COMPONENTS = [
   {
     id: "apm",
     code: "APM",
@@ -10,7 +14,7 @@ export const RESEARCH_COMPONENTS = [
     memberId: "sakindu",
     accent: "#4f46e5",
     icon: "Brain",
-    image: null, // e.g. "/images/components/apm.png"
+    image: null, // e.g. "images/components/apm.png"
     description:
       "Maps a learner's Big Five (OCEAN) personality profile and baseline performance to a teaching strategy, generates a personalised training plan with LLMs, and continuously tunes difficulty from role-play results and live coaching signals.",
     novelty:
@@ -32,7 +36,7 @@ export const RESEARCH_COMPONENTS = [
     memberId: "ishan",
     accent: "#0ea5a4",
     icon: "ScanFace",
-    image: null, // e.g. "/images/components/mca.png"
+    image: null, // e.g. "images/components/mca.png"
     description:
       "Tracks face landmarks in the browser with MediaPipe (eye contact, head pose, mouth and eye openness) while streaming audio over WebSocket for prosody and speech emotion recognition. An Affect Fusion engine combines both streams into live coaching nudges.",
     novelty:
@@ -54,7 +58,7 @@ export const RESEARCH_COMPONENTS = [
     memberId: "methush",
     accent: "#f97362",
     icon: "Drama",
-    image: null, // e.g. "/images/components/rpe.png"
+    image: null, // e.g. "images/components/rpe.png"
     description:
       "Voice-driven role-play against AI characters (an irate customer, a manager in a salary negotiation, a frustrated peer). Each NPC keeps an emotional state across turns and responds with resistance, escalation or cooperation based on how the user communicates.",
     novelty:
@@ -76,7 +80,7 @@ export const RESEARCH_COMPONENTS = [
     memberId: "shanika",
     accent: "#e5a50a",
     icon: "ChartSpline",
-    image: null, // e.g. "/images/components/fspa.png"
+    image: null, // e.g. "images/components/fspa.png"
     description:
       "Brings MCA, RPE and self-assessment data together into a Skill-Twin profile, analyses peer-feedback sentiment with NLP, detects blind spots, forecasts skill trends and generates LLM mentoring recommendations.",
     novelty:

@@ -3,8 +3,8 @@
 **Live site:** [empowerz.netlify.app](https://empowerz.netlify.app/)
 
 [![Netlify](https://img.shields.io/badge/deployed%20on-Netlify-00C7B7?logo=netlify&logoColor=white)](https://empowerz.netlify.app/)
-![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=white)
-![Vite](https://img.shields.io/badge/Vite-5-646CFF?logo=vite&logoColor=white)
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white)
 ![GSAP](https://img.shields.io/badge/GSAP-3-88CE02?logo=greensock&logoColor=white)
 
 The portfolio website for the SLIIT 2026 final-year research project
@@ -71,60 +71,58 @@ Department of Software Engineering, Faculty of Computing, Sri Lanka Institute of
 
 ## Tech stack (website)
 
-- **React 18** + **Vite 5**: client-side single-page app, no backend
-- **GSAP** (ScrollTrigger, SplitText, ScrambleText, Flip) with `@gsap/react`: scroll and hover animations, all disabled under `prefers-reduced-motion`
-- **lucide-react**: icons
-- **Fontsource**: self-hosted Bricolage Grotesque, Geist and Geist Mono
-- Plain CSS with design tokens and light/dark themes (`src/styles/global.css`)
+- Plain **HTML**, **CSS** and vanilla **JavaScript**: static site, no build step, no backend
+- **GSAP** (ScrollTrigger, SplitText, ScrambleText, DrawSVG, Flip) from the jsDelivr CDN: scroll and hover animations, all disabled under `prefers-reduced-motion`
+- **Lucide**: icons, from the jsDelivr CDN
+- **Google Fonts**: Bricolage Grotesque, Geist and Geist Mono
+- CSS design tokens and light/dark themes (`css/style.css`)
 
 ## Getting started
 
-Requires Node.js 18 or newer.
+No install or build needed. Open `index.html` in a browser, or serve the folder locally:
 
 ```bash
-npm install
-npm run dev       # http://localhost:5173
-npm run build     # production build in dist/
-npm run preview   # serve the production build locally
+npx serve .                 # or
+python -m http.server 5173  # http://localhost:5173
 ```
 
 ## Editing content
 
-All text, cards, links and image paths live in `src/constants/`, so you should not need to edit the components.
+All text, cards, links and image paths live in `content/`, so you should not need to edit `index.html` or `js/main.js`.
 
 | File | Controls |
 |------|----------|
 | `site.js` | Project name, title, tagline, logo, hero image, hero stats, nav items, GitHub/demo links |
 | `domain.js` | Literature survey, research gap (+ comparison table), problem, objectives, methodology, technologies |
-| `components.js` | The four research component cards |
+| `components.js` | The coaching-loop words and the four research component cards |
 | `milestones.js` | Timeline dates, descriptions, optional marks |
-| `documents.js` | Document groups and download links |
-| `presentations.js` | Slide decks and thumbnails |
+| `documents.js` | Document groups and links (TAF, proposals, checklists, theses, research paper) |
+| `presentations.js` | Slide deck links and thumbnails |
 | `team.js` | Supervisors and members (photos, emails, LinkedIn, GitHub) |
 | `contact.js` | Contact email, phone, address |
 
-- **Images:** put files in `public/images/` and reference them as e.g. `image: "/images/team/ishan.jpg"`. `null` shows a placeholder.
+- **Images:** put files in `images/` and reference them as e.g. `image: "images/team/ishan.jpg"`. `null` shows a placeholder.
 - **Links:** an empty string `""` shows "Coming soon" (documents/slides) or hides the button/icon.
+- **Icons:** `icon` fields take any [Lucide](https://lucide.dev/icons) name in PascalCase, e.g. `"BookOpen"`.
 - **Milestone status** is worked out from today's date; force it with `status: "completed"`.
 - **Contact form** opens the visitor's email app (`mailto:`) and only appears when `CONTACT.email` is set.
+- **Section headings** (e.g. "Why this research matters") are plain text in `index.html`.
 
 ## Project structure
 
 ```
-src/
-├── components/   # One component per section (Hero, Domain, Team, …)
-├── constants/    # All site content (edit these)
-├── hooks/        # Active section, scroll state, theme
-├── lib/gsap.js   # GSAP setup and shared motion helpers
-└── styles/       # Global stylesheet and design tokens
-public/images/    # Team photos and other static images
+index.html     # Page layout and section headings
+css/style.css  # Stylesheet and design tokens
+js/main.js     # Builds each section from content/ and runs the animations
+content/       # All site content (edit these)
+images/        # Team photos and other static images
 ```
 
 ## Deployment
 
 The site is deployed on **Netlify** at [empowerz.netlify.app](https://empowerz.netlify.app/).
-`netlify.toml` sets the build command (`npm run build`), publish directory (`dist`) and the SPA
-redirect. Any static host (Vercel, GitHub Pages) also works with the same build settings.
+`netlify.toml` publishes the repository root as-is, with no build command. Any static host
+(Vercel, GitHub Pages) also works.
 
 ---
 

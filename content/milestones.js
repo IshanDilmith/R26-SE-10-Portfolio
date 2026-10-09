@@ -3,7 +3,7 @@
 // ("completed" | "upcoming") explicitly.
 // `marks` is optional, e.g. "18/20" — leave "" to hide.
 
-export const MILESTONES = [
+const MILESTONES = [
   {
     title: "Project Proposal",
     start: "2026-03-15",

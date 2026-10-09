@@ -1,6 +1,7 @@
-// Content for the "Domain" section. Each export maps to one tab.
+// Content for the "Domain" section. Each constant maps to one tab.
+// `icon` is any Lucide icon name in PascalCase (https://lucide.dev/icons).
 
-export const DOMAIN_TABS = [
+const DOMAIN_TABS = [
   { id: "literature", label: "Literature Survey", blurb: "Prior work we studied" },
   { id: "gap", label: "Research Gap", blurb: "What existing systems miss" },
   { id: "problem", label: "Research Problem", blurb: "The question we answer" },
@@ -9,7 +10,7 @@ export const DOMAIN_TABS = [
   { id: "technologies", label: "Technologies", blurb: "Tools, models and datasets" },
 ];
 
-export const LITERATURE_SURVEY = {
+const LITERATURE_SURVEY = {
   intro:
     "Gen Z employees (born 1997-2012) are technically strong but often arrive in the workplace without the communication, conflict-handling and emotional intelligence skills employers expect. A 2024 LinkedIn study reports that 62% of organisations see the soft skills gap as a barrier to business success, and Gen Z's average job stint is around 1.1 years. Our survey covered four areas of prior work.",
   cards: [
@@ -46,7 +47,7 @@ export const LITERATURE_SURVEY = {
   ],
 };
 
-export const RESEARCH_GAP = {
+const RESEARCH_GAP = {
   intro:
     "Existing products either teach passively or need expensive hardware, and none combine personalisation, real-time non-verbal feedback, emotionally persistent role-play and unified analytics in a browser.",
   points: [
@@ -72,7 +73,7 @@ export const RESEARCH_GAP = {
   ],
 };
 
-export const RESEARCH_PROBLEM = {
+const RESEARCH_PROBLEM = {
   statement:
     "How can a browser-based, privacy-preserving AI platform measurably improve Gen Z employees' workplace soft skills by combining personality-aware adaptive learning, real-time non-verbal feedback, emotionally persistent role-play and predictive feedback analytics?",
   subProblems: [
@@ -95,7 +96,7 @@ export const RESEARCH_PROBLEM = {
   ],
 };
 
-export const OBJECTIVES = {
+const OBJECTIVES = {
   main: "To develop an adaptive, multimodal AI platform that assesses and improves workplace soft skills through real-time non-verbal analysis, personalised curriculum generation, interactive role-play simulations and predictive feedback analytics.",
   specific: [
     {
@@ -117,7 +118,7 @@ export const OBJECTIVES = {
   ],
 };
 
-export const METHODOLOGY = {
+const METHODOLOGY = {
   intro:
     "The project follows Design Science Research (DSR): iteratively designing, building and evaluating a working artefact that solves a real organisational problem.",
   steps: [
@@ -142,12 +143,12 @@ export const METHODOLOGY = {
       body: "Model metrics (accuracy, F1, ROC-AUC), latency benchmarks, and user trials measuring confidence, usability and engagement.",
     },
   ],
-  // e.g. "/images/architecture/overall.png" — null hides the diagram
+  // e.g. "images/architecture/overall.png" — null hides the diagram
   architectureImage: null,
   architectureCaption: "Overall system architecture",
 };
 
-export const TECHNOLOGIES = [
+const TECHNOLOGIES = [
   { group: "Frontend", items: ["React 18", "Vite", "TailwindCSS", "shadcn/ui", "Framer Motion", "Recharts"] },
   { group: "Backend", items: ["Python", "FastAPI", "WebSockets", "SQLAlchemy", "Alembic"] },
   { group: "Data & Auth", items: ["PostgreSQL", "Supabase Auth", "JWT"] },

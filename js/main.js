@@ -1003,7 +1003,11 @@
       PRESENTATIONS,
       (p) => `
       <article class="deck">
-        <div class="deck-thumb">
+        ${
+          p.link
+            ? `<a href="${esc(p.link)}" ${EXTERNAL} class="deck-thumb" aria-label="Open ${esc(p.title)} slides">`
+            : `<div class="deck-thumb">`
+        }
           ${
             p.thumbnail
               ? `<img src="${esc(p.thumbnail)}" alt="${esc(p.title)}" loading="lazy" />`
@@ -1013,7 +1017,7 @@
                   <span>${esc(SITE.projectId)}</span>
                 </div>`
           }
-        </div>
+        ${p.link ? "</a>" : "</div>"}
         <div class="deck-body">
           <time>${esc(p.date)}</time>
           <h3>${esc(p.title)}</h3>

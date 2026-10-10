@@ -65,10 +65,11 @@
 
 :root {
   color-scheme: light;
-  --bg: #f4f3f6;
-  --bg-tint: #e9e7ef;
-  --surface: #fbfbfc;
-  --surface-2: #e8e6ee;
+  /* Light mode uses very light purples instead of plain white. */
+  --bg: #f6f2fd;
+  --bg-tint: #ede6fa;
+  --surface: #fcfaff;
+  --surface-2: #ebe3f8;
   --ink: #141318;
   --ink-2: #3a3843;
   --muted: #605d6b;
@@ -1963,6 +1964,15 @@ section[id] {
   border: 1px solid var(--line);
   border-radius: var(--r-panel);
   background: var(--surface);
+}
+
+a.deck-thumb {
+  display: block;
+}
+
+a.deck-thumb:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
 }
 
 .deck-thumb img {

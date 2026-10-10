@@ -1,6 +1,7 @@
 # EmpowerZ — Research Portfolio (R26-SE-010)
 
-**Live site:** [empowerz.netlify.app](https://empowerz.netlify.app/)
+**Portfolio site:** [empowerz.netlify.app](https://empowerz.netlify.app/)  
+**Live platform:** [empowerz.online](https://empowerz.online/)
 
 [![Netlify](https://img.shields.io/badge/deployed%20on-Netlify-00C7B7?logo=netlify&logoColor=white)](https://empowerz.netlify.app/)
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white)
@@ -72,9 +73,10 @@ Department of Software Engineering, Faculty of Computing, Sri Lanka Institute of
 ## Tech stack (website)
 
 - Plain **HTML**, **CSS** and vanilla **JavaScript**: static site, no build step, no backend
-- **GSAP** (ScrollTrigger, SplitText, ScrambleText, DrawSVG, Flip) from the jsDelivr CDN: scroll and hover animations, all disabled under `prefers-reduced-motion`
-- **Lucide**: icons, from the jsDelivr CDN
-- **Google Fonts**: Bricolage Grotesque, Geist and Geist Mono
+- **GSAP 3.15** (ScrollTrigger, SplitText, ScrambleText, DrawSVG, Flip): scroll and hover animations, all disabled under `prefers-reduced-motion`
+- **Lucide 0.460**: icons
+- **Self-hosted fonts**: Bricolage Grotesque, Geist and Geist Mono
+- Every library and font is stored in the repo (`js/vendor/`, `fonts/`), so the site works fully offline with no CDN
 - CSS design tokens and light/dark themes (`css/style.css`)
 
 ## Getting started
@@ -104,7 +106,7 @@ All text, cards, links and image paths live in `content/`, so you should not nee
 - **Images:** put files in `images/` and reference them as e.g. `image: "images/team/ishan.jpg"`. `null` shows a placeholder.
 - **Links:** an empty string `""` shows "Coming soon" (documents/slides) or hides the button/icon.
 - **Icons:** `icon` fields take any [Lucide](https://lucide.dev/icons) name in PascalCase, e.g. `"BookOpen"`.
-- **Milestone status** is worked out from today's date; force it with `status: "completed"`.
+- **Milestone status** is worked out from today's date; force it with `status: "completed"`. Each milestone is a drop-down showing its details, date and `marks`.
 - **Contact form** opens the visitor's email app (`mailto:`) and only appears when `CONTACT.email` is set.
 - **Section headings** (e.g. "Why this research matters") are plain text in `index.html`.
 
@@ -114,6 +116,8 @@ All text, cards, links and image paths live in `content/`, so you should not nee
 index.html     # Page layout and section headings
 css/style.css  # Stylesheet and design tokens
 js/main.js     # Builds each section from content/ and runs the animations
+js/vendor/     # GSAP and Lucide (local copies, do not edit)
+fonts/         # Self-hosted web fonts
 content/       # All site content (edit these)
 images/        # Team photos and other static images
 ```

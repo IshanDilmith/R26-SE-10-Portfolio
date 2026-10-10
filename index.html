@@ -9,7 +9,7 @@
     />
     <meta name="theme-color" content="#f4f3f6" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#0d0c10" media="(prefers-color-scheme: dark)" />
-    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="icon" type="image/png" href="favicon.png" />
     <script>
       // Apply the saved theme before first paint to avoid a flash.
       try {
@@ -19,12 +19,6 @@
     </script>
     <title>EmpowerZ | R26-SE-010</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@200..800&family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&display=swap"
-    />
     <link rel="stylesheet" href="css/style.css" />
 
     <!-- Site content: edit the files in content/ to change text, links and images. -->
@@ -37,15 +31,15 @@
     <script src="content/team.js" defer></script>
     <script src="content/contact.js" defer></script>
 
-    <!-- Libraries: GSAP (animation) and Lucide (icons). -->
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollToPlugin.min.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/SplitText.min.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrambleTextPlugin.min.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/DrawSVGPlugin.min.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/Flip.min.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/lucide@0.460.0/dist/umd/lucide.min.js" defer></script>
+    <!-- Libraries, stored locally in js/vendor/: GSAP 3.15.0 (animation) and Lucide 0.460.0 (icons). -->
+    <script src="js/vendor/gsap.min.js" defer></script>
+    <script src="js/vendor/ScrollTrigger.min.js" defer></script>
+    <script src="js/vendor/ScrollToPlugin.min.js" defer></script>
+    <script src="js/vendor/SplitText.min.js" defer></script>
+    <script src="js/vendor/ScrambleTextPlugin.min.js" defer></script>
+    <script src="js/vendor/DrawSVGPlugin.min.js" defer></script>
+    <script src="js/vendor/Flip.min.js" defer></script>
+    <script src="js/vendor/lucide.min.js" defer></script>
 
     <script src="js/main.js" defer></script>
   </head>
@@ -126,6 +120,13 @@
               <p class="section-sub">Key assessments of the 2026 research project, from proposal to publication.</p>
             </header>
             <div class="progress" id="progress"></div>
+            <div class="timeline-actions">
+              <div class="milestone-select">
+                <select id="milestone-select" aria-label="Jump to a milestone"></select>
+                <span class="milestone-select-chev" id="milestone-select-chev" aria-hidden="true"></span>
+              </div>
+              <button type="button" id="timeline-toggle-all" aria-controls="timeline">Expand all</button>
+            </div>
           </div>
           <ol class="timeline" id="timeline"></ol>
         </div>
@@ -150,9 +151,7 @@
             <h2>Slide decks</h2>
             <p class="section-sub">Slides from each assessment stage of the project.</p>
           </header>
-        </div>
-        <div class="deck-stage">
-          <div class="deck-rail" tabindex="0" aria-label="Slide decks, scroll horizontally" id="deck-rail"></div>
+          <div class="deck-grid" id="deck-grid"></div>
         </div>
       </section>
 

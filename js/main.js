@@ -299,7 +299,7 @@
 
     const actions = [`<a href="#components" class="btn btn-primary">Explore the research ${icon("ArrowRight", 18)}</a>`];
     if (SITE.links.demo) {
-      actions.push(`<a href="${esc(SITE.links.demo)}" class="btn btn-ghost" ${EXTERNAL}>${icon("CirclePlay", 18)} Live demo</a>`);
+      actions.push(`<a href="${esc(SITE.links.demo)}" class="btn btn-ghost" ${EXTERNAL}>${icon("Globe", 18)} Live platform</a>`);
     }
     actions.push(
       SITE.links.github
@@ -756,26 +756,113 @@
           : ""
       }`;
 
-    $("#timeline").innerHTML = list(items, (m) => {
+    // Each milestone is a drop-down: the header (date, status, title) opens its details.
+    // The next milestone starts open.
+    $("#timeline").innerHTML = list(items, (m, i) => {
       const completed = m.status === "completed";
       const isNext = m === next;
+      const status = completed ? "Completed" : isNext ? "Next" : "Upcoming";
       return `
-        <li class="timeline-item ${m.status} ${isNext ? "is-next" : ""}">
+        <li class="timeline-item ${m.status} ${isNext ? "is-next is-open" : ""}">
           <span class="timeline-line" aria-hidden="true"></span>
           <span class="timeline-dot" aria-hidden="true">${completed ? icon("Check", 13, { "stroke-width": 3 }) : ""}</span>
           <div class="timeline-body">
-            <div class="timeline-meta">
-              <time datetime="${esc(m.start)}">${esc(dateLabel(m))}</time>
-              <span class="badge ${m.status}">${completed ? "Completed" : isNext ? "Next" : "Upcoming"}</span>
+            <h3>
+              <button type="button" class="timeline-toggle" id="milestone-${i}" aria-expanded="${isNext}" aria-controls="milestone-panel-${i}">
+                <span>
+                  <span class="timeline-meta">
+                    <time datetime="${esc(m.start)}">${esc(dateLabel(m))}</time>
+                    <span class="badge ${m.status}">${status}</span>
+                  </span>
+                  <span class="timeline-title">${esc(m.title)}</span>
+                </span>
+                <span class="chev">${icon("ChevronDown", 18)}</span>
+              </button>
+            </h3>
+            <div class="timeline-panel" id="milestone-panel-${i}" role="region" aria-labelledby="milestone-${i}">
+              <div>
+                <p>${esc(m.description)}</p>
+                <div class="timeline-details">
+                  <span>Date: <strong>${esc(dateLabel(m))}</strong></span>
+                  <span>Status: <strong>${status}</strong></span>
+                  ${m.marks ? `<span>Marks: <strong>${esc(m.marks)}</strong></span>` : ""}
+                </div>
+              </div>
             </div>
-            <h3>${esc(m.title)}</h3>
-            <p>${esc(m.description)}</p>
-            ${m.marks ? `<p class="marks">Marks <strong>${esc(m.marks)}</strong></p>` : ""}
           </div>
         </li>`;
     });
 
     return done;
+  }
+
+  function initMilestoneToggles() {
+    const timeline = $("#timeline");
+    const toggleAll = $("#timeline-toggle-all");
+    const items = $$(".timeline-item", timeline);
+
+    // Page height changes as panels open, so scroll animations below need re-measuring.
+    let refreshTimer;
+    const refreshScroll = () => {
+      if (!HAS_GSAP) return;
+      clearTimeout(refreshTimer);
+      refreshTimer = setTimeout(() => ScrollTrigger.refresh(), 480);
+    };
+
+    const setOpen = (item, open) => {
+      item.classList.toggle("is-open", open);
+      $(".timeline-toggle", item).setAttribute("aria-expanded", String(open));
+    };
+    const paintToggleAll = () => {
+      const allOpen = items.every((item) => item.classList.contains("is-open"));
+      toggleAll.textContent = allOpen ? "Collapse all" : "Expand all";
+      toggleAll.setAttribute("aria-pressed", String(allOpen));
+    };
+
+    items.forEach((item) =>
+      $(".timeline-toggle", item).addEventListener("click", () => {
+        setOpen(item, !item.classList.contains("is-open"));
+        paintToggleAll();
+        refreshScroll();
+      })
+    );
+    toggleAll.addEventListener("click", () => {
+      const open = !items.every((item) => item.classList.contains("is-open"));
+      items.forEach((item) => setOpen(item, open));
+      paintToggleAll();
+      refreshScroll();
+    });
+    paintToggleAll();
+
+    // Main drop-down: choosing a milestone opens it and scrolls it into view.
+    const select = $("#milestone-select");
+    $("#milestone-select-chev").innerHTML = icon("ChevronDown", 16);
+    select.innerHTML =
+      `<option value="">Jump to a milestone…</option>` +
+      list(MILESTONES, (m, i) => `<option value="${i}">${esc(m.title)} · ${esc(dateLabel(m))}</option>`);
+    select.addEventListener("change", () => {
+      const item = items[Number(select.value)];
+      select.value = "";
+      if (!item) return;
+      setOpen(item, true);
+      paintToggleAll();
+      const toggle = $(".timeline-toggle", item);
+      // Wait for the panel to finish opening so the scroll lands in the right place.
+      setTimeout(() => {
+        if (HAS_GSAP) {
+          ScrollTrigger.refresh();
+          gsap.to(window, {
+            duration: motionAllowed() ? 1 : 0,
+            ease: "power3.inOut",
+            scrollTo: { y: item, offsetY: 96, autoKill: true },
+            onComplete: () => toggle.focus({ preventScroll: true }),
+          });
+        } else {
+          item.scrollIntoView({ block: "start" });
+          toggle.focus({ preventScroll: true });
+        }
+      }, motionAllowed() ? 460 : 0);
+    });
   }
 
   function animateMilestones(mm, done) {
@@ -893,7 +980,7 @@
   /* ---------- Presentations ---------- */
 
   function renderPresentations() {
-    $("#deck-rail").innerHTML = list(
+    $("#deck-grid").innerHTML = list(
       PRESENTATIONS,
       (p) => `
       <article class="deck">
@@ -923,55 +1010,15 @@
   }
 
   function animatePresentations(mm) {
-    const section = $("#presentations");
-
+    // Decks rise in one after another the first time the grid scrolls into view.
     mm.add(MOTION_OK, () => {
-      gsap.from(".deck", {
+      gsap.from("#deck-grid .deck", {
         y: 64,
         autoAlpha: 0,
         stagger: 0.1,
         duration: 1.2,
-        scrollTrigger: { trigger: ".deck-stage", start: "top 85%", toggleActions: PLAY_ONCE },
+        scrollTrigger: { trigger: "#deck-grid", start: "top 85%", toggleActions: PLAY_ONCE },
       });
-    });
-
-    // Desktop: pin the decks and walk through them sideways as the page scrolls.
-    mm.add(`(min-width: 1025px) and ${MOTION_OK}`, () => {
-      const stage = $(".deck-stage", section);
-      const rail = $(".deck-rail", section);
-      section.classList.add("is-panning");
-
-      const distance = () => {
-        const last = rail.lastElementChild;
-        const padEnd = parseFloat(getComputedStyle(rail).paddingRight);
-        return Math.max(0, last.offsetLeft + last.offsetWidth + padEnd - rail.clientWidth);
-      };
-
-      const pan = gsap.to(rail, {
-        x: () => -distance(),
-        ease: "none",
-        scrollTrigger: {
-          trigger: stage,
-          pin: true,
-          start: "center center",
-          end: () => `+=${distance()}`,
-          scrub: 1,
-          invalidateOnRefresh: true,
-        },
-      });
-
-      // Slides tilt and settle as they travel in from the right.
-      gsap.utils.toArray(".deck", rail).forEach((deck) => {
-        gsap.from($(".deck-thumb", deck), {
-          rotation: 5,
-          yPercent: 10,
-          scale: 0.88,
-          ease: "none",
-          scrollTrigger: { trigger: deck, containerAnimation: pan, start: "left right", end: "left 50%", scrub: true },
-        });
-      });
-
-      return () => section.classList.remove("is-panning");
     });
   }
 
@@ -986,7 +1033,10 @@
     if (!links.length) return "";
     return `<div class="socials">${list(
       links,
-      (l) => `<a href="${esc(l.href)}" ${EXTERNAL} aria-label="${esc(person.name)} ${l.label}">${icon(l.icon, 16)}</a>`
+      (l) =>
+        `<a href="${esc(l.href)}" ${l.label === "Email" ? "" : EXTERNAL} aria-label="${esc(person.name)} ${l.label}" title="${esc(
+          l.label === "Email" ? person.email : l.label
+        )}">${icon(l.icon, 16)}</a>`
     )}</div>`;
   }
 
@@ -1000,7 +1050,7 @@
           <h3>${esc(m.name)}</h3>
           <p class="member-role">${esc(m.role)}</p>
           <p class="member-id">${esc(m.studentId)}</p>
-          ${socials(m, false)}
+          ${socials(m)}
         </div>
         <span class="member-plus" aria-hidden="true">${icon("Plus", 16)}</span>
         <button type="button" class="member-open" aria-haspopup="dialog" aria-label="Open profile of ${esc(m.name)}"></button>
@@ -1334,6 +1384,7 @@
             <h4>Project</h4>
             <p>${esc(SITE.projectId)}</p>
             <p>${esc(SITE.researchGroup)}</p>
+            ${SITE.links.demo ? `<a href="${esc(SITE.links.demo)}" ${EXTERNAL}>Live platform: ${esc(SITE.links.demo.replace(/^https?:\/\/|\/$/g, ""))}</a>` : ""}
           </div>
           <div>
             <h4>Institution</h4>
@@ -1440,6 +1491,7 @@
 
   initNavbar();
   initDomain();
+  initMilestoneToggles();
   initDocuments();
   initProfileDialog();
 

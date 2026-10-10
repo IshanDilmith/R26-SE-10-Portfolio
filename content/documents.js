@@ -19,12 +19,6 @@ const DOCUMENT_GROUPS = [
     group: "Project Proposal",
     items: [
       {
-        title: "Proposal Report",
-        description: "Group proposal report for the integrated platform.",
-        type: "Folder",
-        link: "https://1drv.ms/f/c/b696d72d5cc053a2/IgAB9Jq5PdxIT6hmPzlKT3KuAeVBIYyKYv6wk7D0D_2N-Fc?e=7PM1vv",
-      },
-      {
         title: "Proposal: Adaptive Pedagogical Module",
         description: "IT22135216 · Ranasinghe S.D.",
         type: "PDF",
@@ -53,7 +47,12 @@ const DOCUMENT_GROUPS = [
   {
     group: "Checklists",
     items: [
-      { title: "Checklist 1", description: "Git repository of the EmpowerZ platform.", type: "Repo", link: "" },
+      {
+        title: "Checklist 1",
+        description: "Git repository of the EmpowerZ platform.",
+        type: "Repo",
+        link: "https://github.com/SakinduD/R26-SE-010",
+      },
       {
         title: "Checklist 2",
         description: "Demo video of the working platform.",

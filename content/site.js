@@ -12,13 +12,14 @@ const SITE = {
   specialization: "B.Sc. (Hons) in IT, Specialising in Software Engineering",
   year: "2026",
   // e.g. "images/logo.png" — null shows the built-in monogram
-  logo: null,
+  logo: "images/logo.png",
   // e.g. "images/hero.png" — null shows the face-landmark illustration
   heroImage: null,
-  // Leave empty ("") to hide the button
+  // Leave empty ("") to hide the button.
+  // `demo` is the deployed EmpowerZ platform, shown as "Live platform" in the hero and footer.
   links: {
     github: "",
-    demo: "",
+    demo: "https://empowerz.online/",
     video: "",
   },
 };

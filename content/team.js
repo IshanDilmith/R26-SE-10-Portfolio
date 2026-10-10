@@ -58,7 +58,7 @@ const TEAM_MEMBERS = [
     name: "Thamel W.M.A.",
     studentId: "IT22195234",
     role: "Role-Play Simulation Engine",
-    image: "images/team/methush.png",
+    image: "images/team/methush.jpg",
     email: "methushanjula@gmail.com",
     linkedin: "https://www.linkedin.com/in/methush",
     github: "https://github.com/MethZ0",

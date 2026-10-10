@@ -454,7 +454,7 @@
 
   const DOMAIN_PANELS = {
     literature: () => `
-      <p class="lead">${esc(LITERATURE_SURVEY.intro)}</p>
+      <blockquote class="statement">${esc(LITERATURE_SURVEY.intro)}</blockquote>
       <div class="panel-grid">
         ${list(
           LITERATURE_SURVEY.cards,
@@ -491,7 +491,7 @@
         </div>`
         : "";
       return `
-        <p class="lead">${esc(intro)}</p>
+        <blockquote class="statement">${esc(intro)}</blockquote>
         <ol class="numbered">${list(points, (point, i) => `<li><span>${pad(i + 1)}</span>${esc(point)}</li>`)}</ol>
         ${table}`;
     },
@@ -506,10 +506,7 @@
       </div>`,
 
     objectives: () => `
-      <div class="main-objective">
-        <h4>Main objective</h4>
-        <p>${esc(OBJECTIVES.main)}</p>
-      </div>
+      <blockquote class="statement">${esc(OBJECTIVES.main)}</blockquote>
       <div class="panel-grid">
         ${list(
           OBJECTIVES.specific,
@@ -522,7 +519,7 @@
       </div>`,
 
     methodology: () => `
-      <p class="lead">${esc(METHODOLOGY.intro)}</p>
+      <blockquote class="statement">${esc(METHODOLOGY.intro)}</blockquote>
       <ol class="steps">
         ${list(
           METHODOLOGY.steps,
@@ -543,6 +540,7 @@
       }`,
 
     technologies: () => `
+      ${typeof TECHNOLOGIES_INTRO === "string" && TECHNOLOGIES_INTRO ? `<blockquote class="statement">${esc(TECHNOLOGIES_INTRO)}</blockquote>` : ""}
       <div class="panel-grid">
         ${list(
           TECHNOLOGIES,
@@ -557,7 +555,7 @@
 
   // Leaf blocks inside a panel, in reading order, for the tab-change stagger.
   const PANEL_ITEMS =
-    ".panel-title, .lead, .statement, .main-objective, .panel-card, .numbered li, .steps li, .table-wrap, .figure";
+    ".panel-title, .statement, .panel-card, .numbered li, .steps li, .table-wrap, .figure";
 
   function initDomain() {
     const nav = $("#domain-nav");
@@ -597,6 +595,8 @@
       panel.setAttribute("aria-labelledby", `domain-tab-${tab.id}`);
       const render = DOMAIN_PANELS[tab.id];
       panel.innerHTML = `<h3 class="panel-title">${esc(tab.label)}</h3>${render ? render() : ""}`;
+      // The new panel has a different height, so scroll positions below need re-measuring.
+      if (HAS_GSAP && animate) requestAnimationFrame(() => ScrollTrigger.refresh());
 
       if (!HAS_GSAP) return;
       if (!animate || !motionAllowed()) {
@@ -620,6 +620,25 @@
     // Keep the highlight attached when the tab list reflows (breakpoints, font load).
     if (HAS_GSAP) new ResizeObserver(() => gsap.set(indicator, placement())).observe(nav);
     select(0, false);
+  }
+
+  function animateDomain(mm) {
+    // The open panel's blocks cascade in every time the section scrolls into view, from either direction.
+    mm.add(MOTION_OK, () => {
+      const play = () =>
+        gsap.fromTo(
+          $$(`#domain-panel :is(${PANEL_ITEMS})`),
+          { y: 28, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 0.9, stagger: 0.05, overwrite: true }
+        );
+      ScrollTrigger.create({
+        trigger: "#domain-panel",
+        start: "top 85%",
+        end: "bottom 15%",
+        onEnter: play,
+        onEnterBack: play,
+      });
+    });
   }
 
   /* ---------- Research components ---------- */
@@ -1502,6 +1521,7 @@
   animateNavbar(mm);
   animateHero(mm);
   animateSectionHeaders(mm);
+  animateDomain(mm);
   animateComponents(mm);
   animateMilestones(mm, milestonesDone);
   animatePresentations(mm);

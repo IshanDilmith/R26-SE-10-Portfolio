@@ -30,10 +30,10 @@ EmpowerZ addresses this with four research components:
 
 | Code | Component | What it does |
 |------|-----------|--------------|
-| **APM** | Adaptive Pedagogical Module | Maps a learner's Big Five (OCEAN) personality to a teaching strategy, generates LLM training plans and adjusts difficulty dynamically. |
-| **MCA** | Multimodal Communication Analysis Module | Tracks face landmarks in the browser (MediaPipe) and analyses voice prosody and emotion, fusing both into real-time coaching nudges, with no raw video leaving the browser. |
-| **RPE** | Role-Play Simulation Engine | Voice-driven role-play with AI characters that keep emotional memory (trust, escalation, mood) across turns. |
-| **FSPA** | Feedback System & Predictive Analytics | Builds a Skill-Twin profile, analyses peer-feedback sentiment, detects blind spots and generates mentoring recommendations. |
+| **APM** | Adaptive Pedagogical Module | Turns a Big Five (OCEAN) profile, the measured baseline and session outcomes into a teaching strategy, a difficulty level and a scenario brief, using deterministic, auditable rules. |
+| **MCA** | Multimodal Communication Analysis Module | Tracks face landmarks in the browser (MediaPipe) and analyses voice with librosa and a wav2vec 2.0 emotion model, returning prioritised real-time nudges and four communication scores, with no video leaving the browser. |
+| **RPE** | Role-Play Simulation Engine | Voice-driven role-play with a lip-synced 3D avatar character, where deterministic code tracks trust and escalation. |
+| **FSPA** | Feedback System & Predictive Analytics | Compares self-ratings with measured scores to detect blind spots, forecasts trends, reads reflections with DistilBERT and generates safe mentoring advice. |
 
 The project follows **Design Science Research (DSR)** and supports **SDG 4 (Quality Education)** and
 **SDG 8 (Decent Work and Economic Growth)**.

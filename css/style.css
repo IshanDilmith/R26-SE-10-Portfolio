@@ -884,14 +884,6 @@ section[id] {
   letter-spacing: -0.03em;
 }
 
-.lead {
-  max-width: 72ch;
-  margin-bottom: 32px;
-  font-size: 1.05rem;
-  line-height: 1.7;
-  color: var(--ink-2);
-}
-
 .panel-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1044,38 +1036,17 @@ section[id] {
   margin-left: 10px;
 }
 
+/* Opening statement of every Domain tab, so all six tabs read the same way. */
 .statement {
+  max-width: 62ch;
   margin-bottom: 32px;
   padding-left: 22px;
   border-left: 3px solid var(--accent);
   font-family: var(--font-display);
-  font-size: clamp(1.25rem, 2vw, 1.6rem);
+  font-size: clamp(1.15rem, 1.7vw, 1.4rem);
   font-weight: 500;
   line-height: 1.32;
   letter-spacing: -0.02em;
-}
-
-.main-objective {
-  margin-bottom: 18px;
-  padding: clamp(22px, 3vw, 32px);
-  border-radius: var(--r-card);
-  background: var(--ink);
-  color: var(--bg);
-}
-
-.main-objective h4 {
-  font-family: var(--font-mono);
-  font-size: 12.5px;
-  font-weight: 500;
-  color: var(--accent-on-ink);
-}
-
-.main-objective p {
-  margin-top: 10px;
-  font-family: var(--font-display);
-  font-size: clamp(1.15rem, 1.7vw, 1.4rem);
-  line-height: 1.38;
-  letter-spacing: -0.015em;
 }
 
 .card-numbered {

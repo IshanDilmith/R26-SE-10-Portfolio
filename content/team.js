@@ -25,7 +25,7 @@ const SUPERVISORS = [
     id: "external-supervisor",
     name: "Dr. W. J. Stanley Fernando",
     role: "External Supervisor",
-    affiliation: "M.B.B.S. (COL) D.F.M. (SL) HND COUNSELLING (FI)",
+    affiliation: "M.B.B.S. (Col), D.F.M. (SL), HND Counselling (FI) · Medical & Counselling Centre, Negombo",
     image: "images/team/external-supervisor.png",
     email: "",
     linkedin: "",

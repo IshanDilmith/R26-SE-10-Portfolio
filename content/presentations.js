@@ -12,14 +12,14 @@ const PRESENTATIONS = [
   {
     title: "Progress Presentation 1",
     date: "May 2026",
-    description: "Early prototypes of each component and the shared platform foundation.",
+    description: "A working vertical slice of each component and the shared platform foundation.",
     link: "https://1drv.ms/p/c/b696d72d5cc053a2/IQDbocxMBhrmTpI96d9FhvmPAbmp_8V9NGnco1FADDq9Sjw?e=BJZngQ",
     thumbnail: null,
   },
   {
     title: "Progress Presentation 2",
     date: "September 2026",
-    description: "Integrated system: affect fusion, NPC emotional memory, DDA and analytics.",
+    description: "Integrated system: contracts connected end to end and the adaptation loop closed.",
     link: "https://1drv.ms/p/c/b696d72d5cc053a2/IQAzBGXIPz1BRbsWTZbMtbvDAeM5X_kj1xphWvfXBg55nR8?e=z2lR1m",
     thumbnail: null,
   },

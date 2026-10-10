@@ -2,31 +2,31 @@
 // `memberId` links to TEAM_MEMBERS in team.js.
 // `icon` is any Lucide icon name in PascalCase (https://lucide.dev/icons).
 
-// Words in the scrolling band above the components.
-const COACHING_LOOP = ["Assess", "Practise", "Coach", "Analyse", "Adapt"];
+// Words in the scrolling band above the components (the practice cycle).
+const COACHING_LOOP = ["Plan", "Practise", "Reflect", "Recalibrate"];
 
 const RESEARCH_COMPONENTS = [
   {
     id: "apm",
     code: "APM",
     title: "Adaptive Pedagogical Module",
-    tagline: "Learns who you are, then decides how to teach you.",
+    tagline: "Decides what the learner practises and how hard it is.",
     memberId: "sakindu",
     accent: "#4f46e5",
     icon: "Brain",
     image: null, // e.g. "images/components/apm.png"
     description:
-      "Maps a learner's Big Five (OCEAN) personality profile and baseline performance to a teaching strategy, generates a personalised training plan with LLMs, and continuously tunes difficulty from role-play results and live coaching signals.",
+      "Scores the 44-item Big Five Inventory into OCEAN bands and turns the profile, the measured MCA baseline and session outcomes into a teaching strategy, a difficulty level and a versioned scenario brief for RPE. It recalibrates after every session, closing the adaptation loop.",
     novelty:
-      "Psychometric scenario mapping: adapts the teaching style, not just the content, to the learner's personality.",
+      "Deterministic, auditable personalisation: documented rules make every decision, a high-Neuroticism band softens tone and feedback, difficulty moves at most one step per adjustment, and no language model ever decides a pedagogical outcome.",
     features: [
-      "OCEAN personality survey and profiling",
-      "Strategy optimiser driven by traits and skill gaps",
-      "Dynamic Difficulty Adjustment (DDA) engine",
-      "LLM-generated learning briefs and scenario recommendations",
-      "Real-time adjustments from live MCA nudges",
+      "BFI-44 scoring to OCEAN percentiles in three bands",
+      "Five-dimension teaching strategy: tone, pacing, complexity, persona, feedback style",
+      "Additive difficulty on a 1-10 scale, capped at one step per adjustment",
+      "Hybrid scenario selection with a Gemini-synthesised fallback",
+      "Two-timescale adaptation from RPE outcomes and FSPA's trend signal",
     ],
-    tech: ["Python", "FastAPI", "Gemini", "scikit-learn"],
+    tech: ["Python", "FastAPI", "Pydantic", "Google Gemini"],
   },
   {
     id: "mca",
@@ -38,60 +38,63 @@ const RESEARCH_COMPONENTS = [
     icon: "ScanFace",
     image: null, // e.g. "images/components/mca.png"
     description:
-      "Tracks face landmarks in the browser with MediaPipe (eye contact, head pose, mouth and eye openness) while streaming audio over WebSocket for prosody and speech emotion recognition. An Affect Fusion engine combines both streams into live coaching nudges.",
+      "Tracks face landmarks in the browser with MediaPipe while streaming three-second audio chunks over an authenticated WebSocket. On the server, librosa prosodic features and a fine-tuned wav2vec 2.0 emotion model feed six acoustic analysers and eight fusion rules, which return prioritised real-time nudges and four communication scores.",
     novelty:
-      "Client-side real-time affect fusion: no raw video leaves the browser, and conflicting signals such as sarcasm or a tense presenter are resolved in real time.",
+      "Privacy by architecture: video never leaves the device, only five numbers per three-second window are sent, and an arbitration policy shows at most one prioritised nudge at a time.",
     features: [
-      "MediaPipe face mesh: EAR, MAR, yaw / pitch / roll",
-      "Pitch, pace, volume and clarity analysers (librosa)",
-      "Speech emotion recognition: SVM and CNN (RAVDESS)",
-      "8 affect fusion rules (e.g. sarcasm, script reader, deer-in-headlights)",
-      "Baseline assessment and session scoring",
+      "MediaPipe Face Mesh: eye and mouth aspect ratios, head yaw, pitch and roll",
+      "wav2vec 2.0 speech emotion recognition: 76.2% speaker-independent accuracy",
+      "Six acoustic analysers and eight behaviour-level fusion rules",
+      "Acoustic nudges processed in 57-76 ms of server time",
+      "Eight-minute AI-guided baseline and four-dimension session scoring",
     ],
-    tech: ["MediaPipe", "librosa", "WebSockets", "PyTorch"],
+    tech: ["MediaPipe", "librosa", "PyTorch (wav2vec 2.0)", "WebSockets"],
   },
   {
     id: "rpe",
     code: "RPE",
     title: "Role-Play Simulation Engine",
-    tagline: "A sparring partner that remembers how you treated it.",
+    tagline: "An always-available counterpart for rehearsing hard conversations.",
     memberId: "methush",
     accent: "#f97362",
     icon: "Drama",
     image: null, // e.g. "images/components/rpe.png"
     description:
-      "Voice-driven role-play against AI characters (an irate customer, a manager in a salary negotiation, a frustrated peer). Each NPC keeps an emotional state across turns and responds with resistance, escalation or cooperation based on how the user communicates.",
+      "Stages a scenario as a spoken conversation with a lip-synced 3D avatar character. Each learner turn is one structured LLM call that returns the character's line plus 17 further schema-validated fields, including its emotion, a coded learner behaviour and an eight-field conversation memory, while deterministic code tracks trust and escalation. Each session ends with a debrief, and the outcome is sent to APM.",
     novelty:
-      "Cross-turn emotional memory: NPCs hold grudges and rebuild trust, so users must use genuine de-escalation instead of scripted answers.",
+      "Explicit relationship state: the language model only writes the character's line and emotion, and deterministic tables turn that emotion into bounded trust (0-100) and escalation (0-5), so the state stays inspectable.",
     features: [
-      "NPC emotional state: trust, escalation and mood",
-      "Scenario library by difficulty, skill and conflict type",
-      "LLM-driven NPC dialogue with end-of-conversation detection",
-      "Outcome evaluation with blind spots and quality curves",
-      "Results feed back into the adaptive training plan",
+      "One structured gpt-5-mini call per turn with 18 schema-validated fields",
+      "Trust (0-100, starting at 50) and escalation (0-5) from deterministic tables",
+      "Conversation memory that holds the learner to commitments made earlier",
+      "TalkingHead 3D avatar with Chirp 3 HD voice, reacting 450 ms before it speaks",
+      "15-second bound on every call, falling back to Gemini Flash-Lite or Groq, then a static line",
+      "Debrief with Thomas-Kilmann conflict style, risks, blind spots and a coaching rewrite",
+      "Five library scenarios, plus scenarios generated from APM training plans",
     ],
-    tech: ["FastAPI", "Gemini / Groq", "Speech-to-text", "PostgreSQL"],
+    tech: ["FastAPI", "OpenAI gpt-5-mini", "TalkingHead 3D", "Chirp 3 HD TTS"],
   },
   {
     id: "fspa",
     code: "FSPA",
     title: "Feedback System & Predictive Analytics",
-    tagline: "A data-driven mirror of your professional behaviour.",
+    tagline: "Shows learners where their self-view differs from what was measured.",
     memberId: "shanika",
     accent: "#e5a50a",
     icon: "ChartSpline",
     image: null, // e.g. "images/components/fspa.png"
     description:
-      "Brings MCA, RPE and self-assessment data together into a Skill-Twin profile, analyses peer-feedback sentiment with NLP, detects blind spots, forecasts skill trends and generates LLM mentoring recommendations.",
+      "Places the learner's self-rating beside the measured scores of the same session, detects blind spots, forecasts skill trends, reads written reflections and generates evidence-grounded mentoring. It returns a longitudinal signal that APM uses to recalibrate the next plan.",
     novelty:
-      "Blind spot detection: correlates self-perception with AI-observed behaviour to identify skills a user thinks they have but does not show.",
+      "Blind spot detection: a gap of at least 10 points between self-rating and measured score is reported as a blind spot, with severity bands at 20 and 30 points, and a counselor-reviewed safety boundary handles distress.",
     features: [
-      "Skill-Twin radar against industry standards",
-      "Peer-feedback sentiment analysis (Transformer NLP)",
-      "Predictive outcome and progress trend models",
-      "LLM mentoring recommendations",
-      "Post-session reports and gamified progress",
+      "Skill Twin: self-rating compared with measured performance",
+      "Ridge regression forecasts (RMSE 4.586, never off the 0-100 scale) and random-forest risk classification",
+      "Reflection sentiment with fine-tuned DistilBERT: 0.854 accuracy on hand-labelled workplace reflections",
+      "Profile-conditioned gpt-5-mini mentoring with a safety boundary",
+      "Experience points, levels, streaks and fourteen badges",
+      "Counselor-reviewed safety boundary that signposts professional support",
     ],
-    tech: ["Transformers", "scikit-learn", "OpenAI", "Recharts"],
+    tech: ["DistilBERT", "scikit-learn", "OpenAI gpt-5-mini", "FastAPI"],
   },
 ];

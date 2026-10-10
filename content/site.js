@@ -26,8 +26,8 @@ const SITE = {
 
 const HERO_STATS = [
   { value: "4", label: "Research components" },
-  { value: "<200ms", label: "Live nudge latency target" },
-  { value: "8", label: "Affect fusion rules" },
+  { value: "<100ms", label: "Acoustic nudge processing" },
+  { value: "76.2%", label: "Speech emotion recognition" },
   { value: "SDG 4 & 8", label: "Sustainable development goals" },
 ];
 

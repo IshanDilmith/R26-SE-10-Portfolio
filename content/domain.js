@@ -12,135 +12,152 @@ const DOMAIN_TABS = [
 
 const LITERATURE_SURVEY = {
   intro:
-    "Gen Z employees (born 1997-2012) are technically strong but often arrive in the workplace without the communication, conflict-handling and emotional intelligence skills employers expect. A 2024 LinkedIn study reports that 62% of organisations see the soft skills gap as a barrier to business success, and Gen Z's average job stint is around 1.1 years. Our survey covered four areas of prior work.",
+    "Employers consistently rank communication and interpersonal skills among the most important attributes of new hires, yet these are the skills graduates most often lack. Gen Z is highly comfortable with technology but has had fewer face-to-face interactions, and soft skills are learned mainly through practice and feedback. Our survey covered six areas of prior work.",
   cards: [
     {
       title: "Passive e-learning",
       icon: "BookOpen",
-      body: "Platforms such as Coursera and LinkedIn Learning deliver high-quality video content but measure learning with static quizzes. They cannot evaluate how a person actually communicates, and offer no personalisation by learning style.",
+      body: "Course libraries such as Coursera and LinkedIn Learning offer high-quality videos and quizzes, but a multiple-choice question cannot measure how a person speaks, listens and reacts under pressure.",
     },
     {
       title: "VR role-play simulations",
       icon: "Glasses",
-      body: "Tools such as Talespin, Bodyswaps and Mursion provide immersive practice, but they need costly headsets and are hard to roll out across a corporate IT environment.",
+      body: "Tools such as Talespin, Bodyswaps and Mursion provide immersive practice, but they need headsets and setup, and their scenarios are mostly scripted branches that cannot respond to what the learner says.",
     },
     {
       title: "Affective computing & MER",
       icon: "ScanFace",
-      body: "Multimodal Emotion Recognition fuses face, voice and text to infer emotional state. Most models are evaluated in the lab, rely on heavy server-side CNNs and fuse modalities after recording rather than in real time.",
+      body: "Multimodal affect-detection systems could observe delivery, but most are research prototypes that either upload video or rely on facial-expression classification, whose validity for inferring emotion is contested.",
     },
     {
       title: "LLMs & conversational agents",
       icon: "MessagesSquare",
-      body: "Transformer LLMs (GPT-4, Gemini) can generate quizzes and hold natural dialogue, and empathetic dialogue systems respond to user emotion. They rarely keep emotional state across turns or adapt to personality traits.",
+      body: "Language models can play a workplace character convincingly, and research coaches such as MACH and Rehearsal showed the value of automated conversational practice, but each covers one skill or one interaction style, with no measured model of the learner.",
     },
     {
       title: "Adaptive learning & DDA",
       icon: "Gauge",
-      body: "Research on personality-aware learning (Big Five) shows engagement gains when content matches the learner. Dynamic difficulty adjustment keeps learners challenged without overwhelming them, but is seldom tied to psychometric profiles.",
+      body: "Aptitude-treatment interaction research shows the best teaching method depends on the learner, and practice works best just beyond the learner's current ability. Most digital training still gives everyone the same content at the same difficulty.",
     },
     {
-      title: "Feedback analytics",
+      title: "Feedback & self-perception",
       icon: "ChartNoAxesCombined",
-      body: "NLP sentiment analysis can classify peer feedback, and ML models can forecast performance. Existing tools treat these in isolation instead of combining behavioural, learning and peer data into one profile.",
+      body: "Feedback improves performance only when the learner accepts it and can act on it, yet people are poor judges of their own competence, so a score that contradicts a learner's self-view is easily dismissed.",
     },
   ],
 };
 
 const RESEARCH_GAP = {
   intro:
-    "Existing products either teach passively or need expensive hardware, and none combine personalisation, real-time non-verbal feedback, emotionally persistent role-play and unified analytics in a browser.",
+    "Existing approaches trade personalisation against realism. No existing solution combines a measured learner model, realistic responsive practice, behavioural sensing and analytics that close the loop. The gap is an integration gap.",
   points: [
-    "Real-time multimodal analysis is too slow and too privacy-invasive when video is uploaded to the cloud; sub-200ms feedback in a standard browser is largely unaddressed.",
-    "Training content is one-size-fits-all; teaching style is not adapted to personality (e.g. introvert vs. extrovert).",
-    "Conversational agents do not keep cross-turn emotional memory, so they cannot model trust erosion, escalation or grudge-holding.",
-    "Learning data (quiz results) and behavioural data (video/audio analysis) sit in silos; no system builds a complete “Skill-Twin” or detects blind spots.",
+    "Instruction is uniform: most digital training gives every learner the same content at the same difficulty, and never recalibrates it from evidence.",
+    "Behaviour is not observed: e-learning measures knowledge, not delivery, and affect-detection prototypes either upload video or rely on contested facial-expression classification.",
+    "Realistic practice does not scale: scripted simulations cannot respond to the learner, and human role-play is costly and depends on scheduling.",
+    "Feedback is not reconciled with self-perception: no system shows learners where their own view of their performance differs from what was measured.",
   ],
   // Comparison table — set to [] to hide
   comparisonColumns: [
-    "Personality adaptation",
-    "Real-time feedback",
-    "Emotional memory role-play",
-    "Unified skill analytics",
+    "Measured learner model",
+    "Responsive live practice",
+    "Behavioural sensing",
+    "Closed-loop analytics",
   ],
   comparisonRows: [
-    { system: "LinkedIn Learning", values: [false, false, false, false] },
-    { system: "Coursera", values: [false, false, false, "partial"] },
-    { system: "Moodle", values: [false, "partial", false, false] },
-    { system: "VR simulations", values: ["partial", true, "partial", false] },
-    { system: "HireVue", values: [false, false, false, "partial"] },
+    { system: "E-learning course libraries", values: [false, false, false, false] },
+    { system: "Personality-aware e-learning", values: ["partial", false, false, false] },
+    { system: "Human coaching & role-play", values: [false, true, "partial", false] },
+    { system: "VR soft-skills simulations", values: [false, "partial", "partial", false] },
+    { system: "Speech-coaching tools", values: [false, false, true, false] },
+    { system: "General LLM chat assistants", values: [false, true, false, false] },
     { system: "EmpowerZ (ours)", values: [true, true, true, true], highlight: true },
   ],
 };
 
 const RESEARCH_PROBLEM = {
   statement:
-    "How can a browser-based, privacy-preserving AI platform measurably improve Gen Z employees' workplace soft skills by combining personality-aware adaptive learning, real-time non-verbal feedback, emotionally persistent role-play and predictive feedback analytics?",
+    "Early-career Generation Z employees have no scalable way to rehearse difficult workplace conversations and to receive feedback that is timely, personal to them, grounded in how they actually behaved, and connected across sessions so that each practice builds on the last.",
   subProblems: [
     {
-      title: "Personalisation",
-      body: "How can teaching style and difficulty adapt to a learner's Big Five personality profile and live performance?",
+      title: "SP1 Personalisation (APM)",
+      body: "How can personality, measured baseline evidence and session outcomes be turned into a teaching strategy, difficulty and scenario that adapt over time while remaining auditable?",
     },
     {
-      title: "Real-time non-verbal feedback",
-      body: "How can facial and vocal cues be fused into accurate coaching nudges within 200ms, without sending raw video to a server?",
+      title: "SP2 Sensing (MCA)",
+      body: "How can facial and vocal behaviour be sensed in real time on commodity hardware, fused into coachable observations and scored fairly, without sending video off the device?",
     },
     {
-      title: "Realistic practice",
-      body: "How can AI characters remember how they were treated and react with trust, escalation and resistance like real colleagues?",
+      title: "SP3 Practice (RPE)",
+      body: "How can an LLM-driven character hold an open conversation fast enough to speak with, while the engine keeps explicit, bounded and inspectable relationship state?",
     },
     {
-      title: "Actionable insight",
-      body: "How can scattered behavioural, learning and peer-feedback data become a Skill-Twin, blind-spot detection and mentoring advice?",
+      title: "SP4 Interpretation (FSPA)",
+      body: "How can self-assessment be compared with measured performance, future performance be forecast, and evidence-grounded advice be generated safely?",
     },
   ],
 };
 
 const OBJECTIVES = {
-  main: "To develop an adaptive, multimodal AI platform that assesses and improves workplace soft skills through real-time non-verbal analysis, personalised curriculum generation, interactive role-play simulations and predictive feedback analytics.",
+  main: "To design, build and evaluate an integrated, web-based soft-skills training platform in which personalised role-play practice, real-time multimodal feedback and longitudinal analytics form one closed and explainable adaptation loop for early-career employees.",
   specific: [
     {
-      title: "Adaptive pedagogy",
-      body: "Map Big Five (OCEAN) personality traits to teaching strategies, generate LLM-based training content and adjust difficulty dynamically.",
+      title: "Personalised, bounded adaptation (APM)",
+      body: "Personalise practice from measured learner traits and evidence through documented, bounded rules.",
     },
     {
-      title: "Multimodal communication analysis Module",
-      body: "Detect facial landmarks with MediaPipe, analyse vocal prosody and fuse both streams into real-time coaching nudges.",
+      title: "Real-time, privacy-preserving feedback (MCA)",
+      body: "Provide real-time feedback on vocal and facial delivery without transmitting video.",
     },
     {
-      title: "Role-play simulation",
-      body: "Build NPCs with cross-turn emotional memory (trust, escalation, mood) for realistic workplace scenarios with outcome evaluation.",
+      title: "Responsive role-play (RPE)",
+      body: "Deliver responsive role-play with explicit, bounded relationship state.",
     },
     {
-      title: "Feedback & predictive analytics",
-      body: "Create a Skill-Twin profile, analyse peer-feedback sentiment, detect blind spots, forecast skill trends and generate mentoring advice.",
+      title: "Visible, safe interpretation (FSPA)",
+      body: "Make self-perception gaps, trends and forecasts visible with safe, evidence-grounded advice.",
+    },
+    {
+      title: "One closed adaptation loop",
+      body: "Integrate the four components into one closed loop through versioned contracts.",
+    },
+    {
+      title: "Engineering quality",
+      body: "Engineer the platform with automated testing, continuous integration and reproducible deployment.",
+    },
+    {
+      title: "Responsible design",
+      body: "Protect privacy, bound LLM behaviour and obtain professional review.",
+    },
+    {
+      title: "User acceptance",
+      body: "Obtain user acceptance of the platform from the target population.",
     },
   ],
 };
 
 const METHODOLOGY = {
   intro:
-    "The project follows Design Science Research (DSR): iteratively designing, building and evaluating a working artefact that solves a real organisational problem.",
+    "The project follows Design Science Research (DSR), designing, building and evaluating a working artefact across three iterations: vertical slices (April to May 2026), end-to-end contracts (June to August) and integration review and evaluation (August to October).",
   steps: [
     {
       title: "Problem identification",
-      body: "Literature review and a survey of 25 students, interns and professionals to confirm the soft skills gap and feature priorities.",
+      body: "Literature and market review in each thesis and supervisor progress reviews identified four root causes and decomposed the common problem into four subproblems.",
     },
     {
       title: "Design",
-      body: "Modular architecture with four research components behind a shared FastAPI backend, PostgreSQL (Supabase) data layer and React client.",
+      body: "One React client and one FastAPI backend, with each component owning its routes and tables and ten versioned contracts defining what crosses each boundary.",
     },
     {
       title: "Development",
-      body: "Client-side computer vision, server-side audio emotion recognition (SVM / CNN), LLM orchestration, psychometric mapping and analytics pipelines.",
+      body: "Browser-side face tracking, server-side wav2vec 2.0 speech emotion recognition, deterministic pedagogy rules, structured LLM role-play and predictive analytics, with a fallback for every model path.",
     },
     {
       title: "Demonstration",
-      body: "End-to-end flow: baseline assessment → personalised training plan → role-play practice with live coaching → Skill-Twin analytics.",
+      body: "One closed loop: personality survey and baseline, goal-based plan, role-play with live nudges, debrief, reflection and analytics, then recalibration of the next plan.",
     },
     {
       title: "Evaluation",
-      body: "Model metrics (accuracy, F1, ROC-AUC), latency benchmarks, and user trials measuring confidence, usability and engagement.",
+      body: "827 of 831 backend tests passing, an adaptation-loop integration test, latency and fault-injection measurements, a counselor review, and user acceptance testing with a mean SUS score of 75.5.",
     },
   ],
   // e.g. "images/architecture/overall.png" — null hides the diagram
@@ -148,11 +165,17 @@ const METHODOLOGY = {
   architectureCaption: "Overall system architecture",
 };
 
+// Intro line shown above the technology groups — set to "" to hide.
+const TECHNOLOGIES_INTRO =
+  "One React client and one FastAPI backend, CPU-only models, and external LLM providers with fallbacks, deployed as three Docker containers on a virtual private server.";
+
 const TECHNOLOGIES = [
-  { group: "Frontend", items: ["React 18", "Vite", "TailwindCSS", "shadcn/ui", "Framer Motion", "Recharts"] },
-  { group: "Backend", items: ["Python", "FastAPI", "WebSockets", "SQLAlchemy", "Alembic"] },
-  { group: "Data & Auth", items: ["PostgreSQL", "Supabase Auth", "JWT"] },
-  { group: "AI / ML", items: ["MediaPipe Face Mesh", "librosa", "scikit-learn (SVM)", "PyTorch (CNN)", "Transformers / BERT", "DistilBERT"] },
-  { group: "LLMs", items: ["Google Gemini", "OpenAI", "Groq", "LangChain"] },
-  { group: "Datasets", items: ["RAVDESS", "FER-2013", "GoEmotions", "DailyDialog"] },
+  { group: "Frontend", items: ["React 18", "Vite 5", "React Router 7", "Tailwind CSS", "shadcn/ui", "Framer Motion"] },
+  { group: "Browser & avatar", items: ["MediaPipe Face Mesh", "Web Speech API", "TalkingHead 3D", "three.js"] },
+  { group: "Backend", items: ["Python 3.12", "FastAPI", "Uvicorn", "Pydantic", "WebSockets"] },
+  { group: "Data & Auth", items: ["PostgreSQL 16", "SQLAlchemy 2.0", "Alembic", "Supabase Auth", "JWT"] },
+  { group: "AI / ML", items: ["wav2vec 2.0 (PyTorch)", "librosa", "PyAV", "DistilBERT (Transformers)", "scikit-learn"] },
+  { group: "LLMs & voice", items: ["OpenAI gpt-5-mini", "Google Gemini (Flash-Lite)", "Groq gpt-oss-120b", "Google Chirp 3 HD TTS", "Google Cloud STT"] },
+  { group: "Datasets", items: ["RAVDESS", "SUBESCO", "Sentiment140", "Glassdoor Job Reviews", "Kaggle Employee Performance"] },
+  { group: "Testing & delivery", items: ["pytest", "Vitest", "GitHub Actions", "Docker Compose", "GHCR", "Nginx"] },
 ];

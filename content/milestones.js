@@ -17,7 +17,7 @@ const MILESTONES = [
     start: "2026-05-11",
     end: "2026-05-13",
     description:
-      "Checklist submission and demonstration of around 50% completion: environment set-up, unimodal pipelines, emotion classifier and core data flows.",
+      "Checklist submission and demonstration of around 50% completion: a working vertical slice of each component, the shared skill vocabulary, authentication and the first contract drafts.",
     marks: "",
   },
   {
@@ -25,7 +25,7 @@ const MILESTONES = [
     start: "2026-08-31",
     end: "2026-09-02",
     description:
-      "Demonstration of around 90% completion: affect fusion, NPC emotional memory, DDA engine and analytics dashboards integrated end to end.",
+      "Demonstration of around 90% completion: contracts implemented end to end, with the MCA baseline feeding APM, scenario briefs reaching RPE, live sensing inside role-play and session records flowing to FSPA.",
     marks: "",
   },
   {
